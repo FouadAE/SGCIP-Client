@@ -90,3 +90,6 @@ body {
 .navbar {
   padding: 0.525rem 1rem;
 }
+.navbar-nav {
+  margin-left: auto;
+}
