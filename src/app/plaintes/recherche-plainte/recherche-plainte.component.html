@@ -1,0 +1,100 @@
+<div class="countainer">
+  <div class="card form-group">
+    <div class="card-body">
+      <h4>Recherche Par:</h4>
+      <div class="row">
+        <div class="col-md-6">
+          <span><label for="numOrdre">Numero D'ordre:</label><input type="text" id="numOrdre"
+                                                                    class="form-control"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <span><label for="status">Status:</label><select name="status" id="status" class="form-control">
+            <option value="status1">s1</option>
+            <option value="status2">s2</option>
+          </select></span>
+        </div>
+        <div class="col-md-4">
+          <span><label for="type">Type:</label><select name="type" id="type" class="form-control">
+            <option value="status1">t1</option>
+            <option value="status2">t2</option>
+          </select></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <span><label for="datedepart">A partir de:</label><input type="date" id="datedepart"
+                                                                   class="form-control"></span>
+        </div>
+        <div class="col-md-6">
+          <span><label for="datefin">Jusqu'a:</label><input type="date" id="datefin" class="form-control"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <button class="btn  mt-4 ml-md-1 btn-success">lancer</button>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-3">
+          <button class="btn mt-4 ml-lg-n5 btn-dark " id="btn-dark">Recherche Avancee</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h4>Liste des visites:</h4>
+      <div><p>Extraire sous forme:</p></div>
+      <a href="#"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a>
+      <div class="row">
+        <div class="col-md-3"><p>show:</p>
+          <select name="nbrShow" id="nbrShow" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3"><span><label>Search:</label><input type="text" class="form-control"></span></div>
+      </div>
+      <br>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Action</th>
+          <th scope="col">Réponse</th>
+          <th scope="col">Numero d'ordre</th>
+          <th scope="col">Objet</th>
+          <th scope="col">Expediteur</th>
+          <th scope="col">Date</th>
+          <th scope="col">Type Plainte</th>
+          <th scope="col">Status</th>
+          <th scope="col">Type</th>
+          <th scope="col">Fichier</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr >
+          <td>
+            <span><i class="fa  btn btn-primary fa-edit mr-2"></i></span>
+            <span><i class="fa  btn btn-danger fa-eye fa-remove mr-2"></i></span>
+            <span><i class="fa  btn btn-danger fa-trash fa-remove mr-2"></i></span>
+          </td>
+          <td><span><i class="fa  btn btn-primary btn-success  mr-2">Ajouter Réponse</i></span></td>
+          <td>shdfhsfhsh</td>
+          <td>gd</td>
+          <td>kj</td>
+          <td>6</td>
+          <td>7</td>
+          <td>qsfkjqslmfj</td>
+          <td>9</td>
+          <td>10</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
