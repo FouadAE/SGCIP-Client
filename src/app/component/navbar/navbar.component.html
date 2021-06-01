@@ -11,24 +11,30 @@
     <i
       class="fa fa-toggle-on"
       [ngClass]="{
-        'fa-toggle-on': show,
-        'fa-toggle-off': !show
+        'fa-toggle-on': showSidebar,
+        'fa-toggle-off': !showSidebar
       }"
     >
     </i>
   </button>
   <button
     class="navbar-toggler"
+    [ngClass]="{ collapsed: showNavbarToogle }"
     type="button"
     data-toggle="collapse"
     data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent"
-    aria-expanded="false"
+    attr.aria-expanded="{{ showNavbarToogle }}"
     aria-label="Toggle navigation"
+    (click)="toogleNavbar()"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div
+    class="collapse navbar-collapse"
+    [ngClass]="{ show: showNavbarToogle }"
+    id="navbarSupportedContent"
+  >
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active" *ngIf="isLoggedInf()">
         <a class="nav-link" routerLink="/welcome"
@@ -50,7 +56,12 @@
       <li class="nav-item" *ngIf="isLoggedInf()">
         <a class="nav-link" routerLink="/reunion">Reunion</a>
       </li>
-      <li class="nav-item dropdown nav__item--account" *ngIf="isLoggedInf()">
+      <li
+        class="nav-item dropdown nav__item--account"
+        [ngClass]="{ show: showDropdown }"
+        *ngIf="isLoggedInf()"
+        (click)="toogleDropdown()"
+      >
         <a
           class="nav-link"
           href="#"
@@ -58,13 +69,14 @@
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
-          aria-expanded="false"
+          attr.aria-expanded="{{ showDropdown }}"
         >
           <img src="../../assets/images/cd-avatar.svg" />
           <span class="ml-2"> {{ getUser().username }}</span>
         </a>
         <div
           class="dropdown-menu dropdown-menu-right"
+          [ngClass]="{ show: showDropdown }"
           aria-labelledby="navbarDropdown"
         >
           <a class="dropdown-item" href="#"
