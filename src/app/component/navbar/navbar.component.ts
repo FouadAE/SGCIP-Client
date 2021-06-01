@@ -12,7 +12,9 @@ import {TokenStorageService} from "../../services/token-storage.service";
 export class NavbarComponent implements OnInit {
 
   message: any;
-  show = true;
+  showSidebar = true;
+  showDropdown = false;
+  showNavbarToogle = false;
 
   constructor(private route: Router, private data: SharingDataService, private tokenStorage: TokenStorageService) {
   };
@@ -23,9 +25,17 @@ export class NavbarComponent implements OnInit {
   }
 
   switchMenu() {
-    this.show = !this.show;
-    this.data.changeMessage(this.show);
+    this.showSidebar = !this.showSidebar;
+    this.data.changeMessage(this.showSidebar);
   }
+  
+  toogleDropdown(){
+      this.showDropdown = !this.showDropdown;
+    }
+  
+  toogleNavbar(){
+      this.showNavbarToogle = !this.showNavbarToogle;
+    }
 
   isLoggedInf() {
     let jwtHelper = new JwtHelperService();
@@ -37,13 +47,13 @@ export class NavbarComponent implements OnInit {
     let isExpired = jwtHelper.isTokenExpired(token);
     return !isExpired;
   }
+  
   getUser(){
     return this.tokenStorage.getUser();
-
   }
+  
   signOut(){
     return this.tokenStorage.signOut();
-
   }
 
 }
