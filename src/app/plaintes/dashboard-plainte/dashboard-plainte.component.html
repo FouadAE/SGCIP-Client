@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Nombre de Plainte par : <select name="chart" id="chart" class="form-select">
+      <option value="status">Status</option>
+      <option value="type">Type</option>
+      <option value="divion">Division</option>
+    </select></h1>
+  </div>
+  <div class="card-body">
+
+    <p-chart type="pie" [data]="data"></p-chart>
+  </div>
+
+</div>

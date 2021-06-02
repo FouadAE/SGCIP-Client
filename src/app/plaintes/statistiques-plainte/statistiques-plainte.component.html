@@ -4,31 +4,29 @@
       <div class="card" id="first-card">
         <div class="card-header">Les Dernier Plainte</div>
         <table class="table">
+          <tr>
           <th>Numero d'ordre</th>
           <th>Date Plainte</th>
           <th>Objet</th>
           <th>Status</th>
-          <tr>
-            <td>kjkj</td>
-            <td>kjh</td>
-            <td>jhg</td>
-            <td>kjkj</td>
           </tr>
-          <tr>
-            <td>kjkj</td>
-            <td>kjh</td>
-            <td>jhg</td>
-            <td>kjkj</td>
+          <tr *ngFor="let p of plaintes">
+            <td>{{p.numeroDOrdre}}</td>
+            <td>{{p.createdAt}}</td>
+            <td>{{p.dossier.ref}}</td>
+            <td>{{p.instruction.nom}}</td>
           </tr>
         </table>
       </div>
       <div class="card">
         <div class="card-header"> Plaintes du jour</div>
         <table class="table">
+          <tr>
           <th>Numero d'ordre</th>
           <th>Date Plainte</th>
           <th>Objet</th>
           <th>Status</th>
+          </tr>
           <tr>
             <td>kjkj</td>
             <td>kjh</td>
@@ -44,11 +42,13 @@
           <div class="card">
             <div class="card-body ">
               <img src="https://image.flaticon.com/icons/png/128/900/900772.png" class="statistic" alt="">
-              <h1>2</h1>
+              <h1>{{ nbr }}</h1>
               <p>Nombre Total des Plaintes</p>
             </div>
             <div class="card-footer" id="card-footer-1">%Total</div>
           </div>
+
+
           <div class="card">
             <div class="card-body">
               <img src="https://image.flaticon.com/icons/png/128/900/900772.png" class="statistic" alt="">
@@ -57,10 +57,14 @@
             </div>
             <div class="card-footer" id="card-footer-2">%Total</div>
           </div>
+
+
+
+
           <div class="card">
             <div class="card-body">
               <img src="https://image.flaticon.com/icons/png/128/900/900772.png" class="statistic" alt="">
-              <h1>2</h1>
+              <h1>{{nbrTraitee}}</h1>
               <p>Nombre des Plaintes Traiteé</p>
             </div>
             <div class="card-footer" id="card-footer-3">%Total</div>
@@ -78,7 +82,7 @@
           <div class="card">
             <div class="card-body">
               <img src="https://image.flaticon.com/icons/png/128/900/900772.png" class="statistic" alt="">
-              <h1>2</h1>
+              <h1>{{nbrEnCours}}</h1>
               <p>Nombre des Plaintes En Cours</p>
             </div>
             <div class="card-footer" id="card-footer-5">%Total</div>
@@ -86,7 +90,7 @@
           <div class="card">
             <div class="card-body">
               <img src="https://image.flaticon.com/icons/png/128/900/900772.png" class="statistic" alt="">
-              <h1>2</h1>
+              <h1>{{nbrDossier}}</h1>
               <p>Nombre Total des Dossiers</p>
             </div>
             <div class="card-footer" id="card-footer-6">%Total</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Plainte} from "../../controller/models/plainte.model";
+import {PlaintesService} from "../../services/plaintes.service";
 
 @Component({
   selector: 'app-ajouter-plainte',
@@ -7,7 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjouterPlainteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private plaintesService: PlaintesService) {
+  }
+
+  get plainte(): Plainte {
+    return this.plaintesService.plainte;
+  }
+
+
+  public ajouterPlainte() {
+    return this.plaintesService.ajouterPlainte();
+  }
+
 
   ngOnInit(): void {
   }

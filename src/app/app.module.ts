@@ -21,6 +21,8 @@ import {SharingDataService} from "./services/sharing-data.service";
 import { NotificationPlainteComponent } from './plaintes/notification-plainte/notification-plainte.component';
 import { NotificationVisiteComponent } from './visites/notification-visite/notification-visite.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import {ChartModule} from "primeng/chart";
+import {CardModule} from "primeng/card";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartModule,
+    CardModule
   ],
   providers: [SharingDataService],
   bootstrap: [AppComponent]
