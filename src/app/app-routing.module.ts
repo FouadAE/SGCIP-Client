@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
@@ -40,7 +41,8 @@ const routes: Routes = [
         path: 'notification-palinte',
         component: NotificationPlainteComponent
       }
-    ]
+    ],
+    canActivate:[AuthGuardService]
   },
   {
     path: 'visite',

@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -28,6 +29,17 @@ export class AuthService {
       email,
       password
     }, httpOptions);
+  }
+
+  isLoggedIn() {
+    let jwtHelper = new JwtHelperService();
+    let token = sessionStorage.getItem('auth-token');
+    if (!token) {
+      return false;
+    }
+    let expirationDate = jwtHelper.getTokenExpirationDate(token);
+    let isExpired = jwtHelper.isTokenExpired(token);
+    return !isExpired;
   }
 }
 

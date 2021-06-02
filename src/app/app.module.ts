@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -23,6 +24,8 @@ import { NotificationVisiteComponent } from './visites/notification-visite/notif
 import { WelcomeComponent } from './welcome/welcome.component';
 import {ChartModule} from "primeng/chart";
 import {CardModule} from "primeng/card";
+import { NoAccesComponent } from './component/no-acces/no-acces.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import {CardModule} from "primeng/card";
     NavbarComponent,
     NotificationPlainteComponent,
     NotificationVisiteComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NoAccesComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,7 @@ import {CardModule} from "primeng/card";
     ChartModule,
     CardModule
   ],
-  providers: [SharingDataService],
+  providers: [SharingDataService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
