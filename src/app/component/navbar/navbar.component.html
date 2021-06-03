@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
   <div class="sidebar-heading bg-warning" *ngIf="isLoggedInf()">
-    <img src="../../assets/images/logo_chichaoua.png" alt="Logo" />
+    <img src="assets/images/logo_chichaoua.png" alt="Logo" />
   </div>
   <button
     class="btn btn-sm btn-warning"
@@ -64,14 +64,13 @@
       >
         <a
           class="nav-link"
-          href="#"
           id="navbarDropdown"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
           attr.aria-expanded="{{ showDropdown }}"
         >
-          <img src="../../assets/images/cd-avatar.svg" />
+          <img src="assets/images/cd-avatar.svg" alt="#"/>
           <span class="ml-2"> {{ getUser().username }}</span>
         </a>
         <div

@@ -93,3 +93,8 @@ body {
 .navbar-nav {
   margin-left: auto;
 }
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}

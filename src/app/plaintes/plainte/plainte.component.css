@@ -82,3 +82,13 @@ body {
 .navbar {
   padding: 0.525rem 1rem;
 }
+
+.badge-warning {
+  color: #212529;
+  background-color: #ffc107;
+}
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
