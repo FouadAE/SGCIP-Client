@@ -1,15 +1,19 @@
-button{
+button {
   width: 300px;
 }
-#btn-dark{
+
+#btn-dark {
   width: 350px;
 }
-.countainer{
+
+.countainer {
   background-color: #c9daec;
 }
-.card{
+
+.card {
   margin: 10px;
 }
-#nbrShow{
+
+#nbrShow {
   margin-bottom: 10px;
 }
