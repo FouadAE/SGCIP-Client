@@ -1,16 +1,12 @@
-
-
-.card{
+.card {
   margin: 10px;
 }
 
-.countainer{
+.countainer {
   background-color: #c9daec;
 }
-.card-header{
+
+.card-header {
   height: 40px;
   padding: 5px;
 }
-
-
-
