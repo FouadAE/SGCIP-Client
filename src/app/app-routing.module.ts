@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -15,8 +16,13 @@ import {AjouterVisiteComponent} from "./visites/ajouter-visite/ajouter-visite.co
 import {StatistiquesVisiteComponent} from "./visites/statistiques-visite/statistiques-visite.component";
 import {NotificationVisiteComponent} from "./visites/notification-visite/notification-visite.component";
 import {WelcomeComponent} from "./welcome/welcome.component";
+import { NoAccesComponent } from './component/no-acces/no-acces.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: WelcomeComponent
+  },
   {
     path: 'plainte',
     component: PlainteComponent,
@@ -68,7 +74,8 @@ const routes: Routes = [
         path: 'notification-visite',
         component: NotificationVisiteComponent
       }
-    ]
+    ],
+    canActivate:[AuthGuardService]
   },
   {
     path: 'login',
@@ -77,8 +84,15 @@ const routes: Routes = [
   {
     path: 'welcome',
     component: WelcomeComponent
+  },
+  {
+    path: 'no-access',
+    component: NoAccesComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
-
 ]
 
 @NgModule({

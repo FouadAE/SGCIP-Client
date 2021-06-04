@@ -50,15 +50,14 @@ export class PlaintesService {
         alert(error);
       }
     )
-
   }
 
   rechercheCritere() {
     return this.http.post(this.url+'plainte/critere', this._vo);
   }
+
   nbrTotalPlainteFunc() {
     return this.http.get<Array<Plainte>>(this.url + 'plainte/');
-
   }
 
   nbrPlainteTraitee() {
@@ -68,11 +67,17 @@ export class PlaintesService {
   nbrPlainteEnCours() {
     return this.http.get(this.url + 'plainte/status/statusName/en coure');
   }
+
   nbrPlaintePasEncore() {
     return this.http.get(this.url + 'plainte/status/statusName/pasencore');
   }
+
   nbrPlainteDossier(){
     return this.http.get(this.url + 'dossier/');
+  }
+
+  findByCreatedDateBetween(startdate: any, enddate: any){
+    return this.http.get<Array<Plainte>>(this.url + 'plainte/createddatbetween/endDate/' + enddate + '/startdate/' + startdate);
   }
 
 }

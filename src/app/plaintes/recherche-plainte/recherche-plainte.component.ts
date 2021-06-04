@@ -13,6 +13,7 @@ export class RecherchePlainteComponent implements OnInit {
 
   public resultCritere!: Array<Plainte>;
   public findOrNot = true;
+  private createddatebetween: any = {startdate: null, enddate: null};
 
   constructor(private plainteservice: PlaintesService) {
   }
@@ -24,7 +25,13 @@ export class RecherchePlainteComponent implements OnInit {
     return this.plainteservice.vo;
   }
 
-
+  checkResultCritere(){
+    if(Object.keys(this.resultCritere).length > 0){
+      this.findOrNot = true;
+    }else{
+      this.findOrNot = false;
+    }
+  }
 
   rechercheCritere() {
     this.resultCritere = new Array<Plainte>();
@@ -32,15 +39,32 @@ export class RecherchePlainteComponent implements OnInit {
       data => {
         if (Object.keys(data).length > 0) {
           this.resultCritere = data as Plainte[];
-          this.findOrNot=true;
-        } else {
-          this.findOrNot = false;
         }
-        console.log(data);
       }, error => {
         alert('ha error ' + error);
       }
     );
   }
 
+  findByCreatedDateBetween(){
+    const {startdate, enddate} = this.createddatebetween;
+    this.plainteservice.findByCreatedDateBetween(startdate, enddate).subscribe(
+      data =>{
+        let result = data as Plainte[];
+        if(Object.keys(this.resultCritere).length > 0){
+          this.resultCritere = this.resultCritere.filter((el) => result.includes(el));
+        }else{
+          this.resultCritere = result;
+        }
+      }, error =>{
+        console.log(error);
+      }
+    )
+  }
+
+  lancerRecherche(){
+    this.rechercheCritere;
+    this.findByCreatedDateBetween;
+    this.checkResultCritere;
+  }
 }

@@ -1,167 +1,276 @@
 <div class="countainer">
-  <div class="card card-1" ><label>Dossier</label>
-    <select name="dossier" [(ngModel)]="plainte.dossier.nom" >
+  <div class="card card-1">
+    <label>Dossier</label>
+    <input list="dossier" name="dossier" [(ngModel)]="plainte.dossier.nom" />
+    <datalist id="dossier">
+      <option value="dossier"></option>
+      <option value="dossier2"></option>
+      <option value="dossier3"></option>
+    </datalist>
+    <!-- <select name="dossier" [(ngModel)]="plainte.dossier.nom">
       <option value="dossier">Dossier1</option>
       <option value="dossier2">Dossier2</option>
       <option value="dossier3">Dossier3</option>
-    </select>
+    </select> -->
   </div>
   <div class="card card-2">
     <div class="card-header">Information Plainte</div>
-    <div class="card-body  form-group">
+    <div class="card-body form-group">
       <div class="row">
         <div class="col-md-4">
-          <span><label>Numero d'ordre</label><input type="text" name="numero-ordre" placeholder="numero d'ordre" class="input-group form-control" [(ngModel)]="plainte.numeroDOrdre"></span>
+          <span
+            ><label>Numero d'ordre</label
+            ><input
+              type="text"
+              name="numero-ordre"
+              placeholder="numero d'ordre"
+              class="input-group form-control"
+              [(ngModel)]="plainte.numeroDOrdre"
+          /></span>
         </div>
         <div class="col-md-4">
-          <span><label>Date Plainte</label><input type="date" name="date-plainte" placeholder="date plainte" class="input-group form-control" [(ngModel)]="plainte.datePlainte"></span>
+          <span
+            ><label>Date Plainte</label
+            ><input
+              type="date"
+              name="date-plainte"
+              placeholder="date plainte"
+              class="input-group form-control"
+              [(ngModel)]="plainte.datePlainte"
+          /></span>
         </div>
         <div class="col-md-4">
-          <span><label>Objet Plainte</label><input type="text" name="objet-plainte" placeholder="objet plainte" class="input-group form-control" [(ngModel)]="plainte.objet" ></span>
+          <span
+            ><label>Objet Plainte</label
+            ><input
+              type="text"
+              name="objet-plainte"
+              placeholder="objet plainte"
+              class="input-group form-control"
+              [(ngModel)]="plainte.objet"
+          /></span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <span><label>Publie</label><input type="date" placeholder="publie" class="input-group form-control" name="publie" [(ngModel)]="plainte.publie"></span>
+          <span
+            ><label>Publie</label
+            ><input
+              type="date"
+              placeholder="publie"
+              class="input-group form-control"
+              name="publie"
+              [(ngModel)]="plainte.publie"
+          /></span>
         </div>
         <div class="col-md-4">
-
-             <span><label>Division</label>
-              <select name="status" class="form-select select form-control" id="dividion" [(ngModel)]="plainte.division.ref">
+          <span
+            ><label>Division</label>
+            <select
+              name="status"
+              class="form-select select form-control"
+              id="dividion"
+              [(ngModel)]="plainte.division.ref"
+            >
               <option value="division">s1</option>
               <option>s2</option>
               <option>s3</option>
             </select>
-            </span>
-
+          </span>
         </div>
         <div class="col-md-4">
-          <span><label>Date Envoi</label><input type="date" placeholder="" class="input-group form-control" [(ngModel)]="plainte.dateEnvoi"></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span><label>Expediteur</label><input type="text" placeholder="expediteur" class="input-group form-control" [(ngModel)]="plainte.expediteur"></span>
-        </div>
-        <div class="col-md-4">
-          <span><label>Numero d'envoi</label><input type="text" placeholder="numero d'envoi" class="input-group form-control" [(ngModel)]="plainte.numeroEnvoi"></span>
-        </div>
-        <div class="col-md-4">
-          <span><label>Observation</label><input type="text" placeholder="observation" class="input-group form-control" [(ngModel)]="plainte.observation"></span>
+          <span
+            ><label>Date Envoi</label
+            ><input
+              type="date"
+              placeholder=""
+              class="input-group form-control"
+              [(ngModel)]="plainte.dateEnvoi"
+          /></span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-             <span><label>Status</label>
-              <select name="status" class="form-select select form-control" id="statu" [(ngModel)]="plainte.status.statusName">
+          <span
+            ><label>Expediteur</label
+            ><input
+              type="text"
+              placeholder="expediteur"
+              class="input-group form-control"
+              [(ngModel)]="plainte.expediteur"
+          /></span>
+        </div>
+        <div class="col-md-4">
+          <span
+            ><label>Numero d'envoi</label
+            ><input
+              type="text"
+              placeholder="numero d'envoi"
+              class="input-group form-control"
+              [(ngModel)]="plainte.numeroEnvoi"
+          /></span>
+        </div>
+        <div class="col-md-4">
+          <span
+            ><label>Observation</label
+            ><input
+              type="text"
+              placeholder="observation"
+              class="input-group form-control"
+              [(ngModel)]="plainte.observation"
+          /></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <span
+            ><label>Status</label>
+            <select
+              name="status"
+              class="form-select select form-control"
+              id="statu"
+              [(ngModel)]="plainte.status.statusName"
+            >
               <option value="pasencore">s1</option>
               <option value="traitee">s2</option>
               <option value="en coure">s3</option>
             </select>
-            </span>
+          </span>
         </div>
         <div class="col-md-4">
-            <span><label>Classe</label>
-              <select name="classe" class="form-select select form-control" id="classe" [(ngModel)]="plainte.pClasse.ref">
+          <span
+            ><label>Classe</label>
+            <select
+              name="classe"
+              class="form-select select form-control"
+              id="classe"
+              [(ngModel)]="plainte.pClasse.ref"
+            >
               <option value="Class">c1</option>
               <option>c2</option>
               <option>c3</option>
             </select>
-            </span>
+          </span>
         </div>
         <div class="col-md-4">
-            <span><label>Plainte Depart</label>
-              <select name="plainte-depart" class="form-select select form-control" id="tPlainte" [(ngModel)]="plainte.plainteDepart.ref">
-                <option value="destinatiare">type1</option>
-                <option>type2</option>
-                <option>type3</option>
-              </select>
-            </span></div>
+          <span
+            ><label>Plainte Depart</label>
+            <select
+              name="plainte-depart"
+              class="form-select select form-control"
+              id="tPlainte"
+              [(ngModel)]="plainte.plainteDepart.ref"
+            >
+              <option value="destinatiare">type1</option>
+              <option>type2</option>
+              <option>type3</option>
+            </select>
+          </span>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-               <span><label>Source</label>
-              <select name="source" class="form-select select form-control" id="source" [(ngModel)]="plainte.source">
+          <span
+            ><label>Source</label>
+            <select
+              name="source"
+              class="form-select select form-control"
+              id="source"
+              [(ngModel)]="plainte.source"
+            >
               <option>src1</option>
               <option>src2</option>
               <option>src3</option>
             </select>
-            </span>
+          </span>
         </div>
         <div class="col-md-4">
-            <span><label>Type</label>
-              <select name="type" class="form-select select form-control" id="type" [(ngModel)]="plainte.theme.ref">
+          <span
+            ><label>Type</label>
+            <select
+              name="type"
+              class="form-select select form-control"
+              id="type"
+              [(ngModel)]="plainte.theme.ref"
+            >
               <option value="theme">t1</option>
               <option>t2</option>
               <option>t3</option>
             </select>
-            </span>
+          </span>
         </div>
-        <div class="col-md-4">
-        </div>
+        <div class="col-md-4"></div>
       </div>
       <div class="row">
         <div class="col-md-4">
-             <span><label>Visa</label>
-              <select name="visa" class="form-select select form-control" id="visa" [(ngModel)]="plainte.visa">
+          <span
+            ><label>Visa</label>
+            <select
+              name="visa"
+              class="form-select select form-control"
+              id="visa"
+              [(ngModel)]="plainte.visa"
+            >
               <option name="">v1</option>
               <option>v2</option>
               <option>v3</option>
             </select>
-            </span>
+          </span>
         </div>
         <div class="col-md-4">
-            <span><label>Instruction</label>
-              <select name="instruction" class="form-select select form-control" id="instruction" [(ngModel)]="plainte.instruction.ref">
+          <span
+            ><label>Instruction</label>
+            <select
+              name="instruction"
+              class="form-select select form-control"
+              id="instruction"
+              [(ngModel)]="plainte.instruction.ref"
+            >
               <option value="instruction">instruction1</option>
               <option>instruction2</option>
               <option>instruction3</option>
             </select>
-            </span>
+          </span>
         </div>
         <div class="col-md-4">
-            <span><label>Autre Instruction</label>
-             <input type="text" placeholder="autre intruction" class="input-group form-control" [(ngModel)]="plainte.ref">
-            </span>
+          <span
+            ><label>Autre Instruction</label>
+            <input
+              type="text"
+              placeholder="autre intruction"
+              class="input-group form-control"
+              [(ngModel)]="plainte.ref"
+            />
+          </span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-            <span><label>Catégorie</label>
-              <select name="categorie" class="form-select select form-control" id="categorie" [(ngModel)]="plainte.type">
+          <span
+            ><label>Catégorie</label>
+            <select
+              name="categorie"
+              class="form-select select form-control"
+              id="categorie"
+              [(ngModel)]="plainte.type"
+            >
               <option value="eau">cat1</option>
               <option>cat2</option>
               <option>cat3</option>
             </select>
-            </span>
+          </span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <span><label >Fichier</label><br><input type="file" name="fichier"></span>
+          <span
+            ><label>Fichier</label><br /><input type="file" name="fichier"
+          /></span>
         </div>
       </div>
-      <button class="btn  btn-primary mt-2" (click)="ajouterPlainte()">Ajouter Plainte</button>
-
+      <button class="btn btn-primary mt-2" (click)="ajouterPlainte()">
+        Ajouter Plainte
+      </button>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
