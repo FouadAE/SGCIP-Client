@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
 import {Vo} from "../../controller/models/vo.model";
@@ -13,7 +13,6 @@ export class RecherchePlainteComponent implements OnInit {
 
   public resultCritere!: Array<Plainte>;
   public findOrNot = true;
-  private createddatebetween: any = {startdate: null, enddate: null};
 
   constructor(private plainteservice: PlaintesService) {
   }
@@ -25,20 +24,19 @@ export class RecherchePlainteComponent implements OnInit {
     return this.plainteservice.vo;
   }
 
-  checkResultCritere(){
-    if(Object.keys(this.resultCritere).length > 0){
-      this.findOrNot = true;
-    }else{
-      this.findOrNot = false;
-    }
-  }
+
 
   rechercheCritere() {
     this.resultCritere = new Array<Plainte>();
+    if (this.Vo.endDate == null && this.Vo.startDate == null && this.Vo.status == null && this.Vo.type == null && this.Vo.numeroDOrdre == null)
+      return;
     this.plainteservice.rechercheCritere().subscribe(
       data => {
         if (Object.keys(data).length > 0) {
           this.resultCritere = data as Plainte[];
+          this.findOrNot = true;
+        } else {
+          this.findOrNot = false;
         }
       }, error => {
         alert('ha error ' + error);
@@ -46,25 +44,5 @@ export class RecherchePlainteComponent implements OnInit {
     );
   }
 
-  findByCreatedDateBetween(){
-    const {startdate, enddate} = this.createddatebetween;
-    this.plainteservice.findByCreatedDateBetween(startdate, enddate).subscribe(
-      data =>{
-        let result = data as Plainte[];
-        if(Object.keys(this.resultCritere).length > 0){
-          this.resultCritere = this.resultCritere.filter((el) => result.includes(el));
-        }else{
-          this.resultCritere = result;
-        }
-      }, error =>{
-        console.log(error);
-      }
-    )
-  }
 
-  lancerRecherche(){
-    this.rechercheCritere;
-    this.findByCreatedDateBetween;
-    this.checkResultCritere;
-  }
 }
