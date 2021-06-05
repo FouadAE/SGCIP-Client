@@ -1,41 +1,31 @@
-<div class="countainer">
+<div class="countainer mt-4">
   <div class="row">
     <div class="col-md-6">
       <div class="card" id="first-card">
-        <div class="card-header">Les Dernier Plainte</div>
-        <table class="table">
+        <div ><h4>Les Dernier Plainte</h4></div>
+        <div class="table-responsive">
+        <table class="table table-hover">
+          <thead >
           <tr>
             <th>Numero d'ordre</th>
             <th>Date Plainte</th>
             <th>Objet</th>
             <th>Status</th>
           </tr>
+          </thead>
+          <tbody>
           <tr *ngFor="let p of plaintes">
             <td>{{ p.numeroDOrdre }}</td>
             <td>{{ p.createdAt }}</td>
             <td>{{ p.dossier.ref }}</td>
-            <td>{{ p.instruction.nom }}</td>
+            <td>{{ p.status.statusName }}</td>
           </tr>
+          </tbody>
         </table>
-      </div>
-      <div class="card">
-        <div class="card-header">Plaintes du jour</div>
-        <table class="table">
-          <tr>
-            <th>Numero d'ordre</th>
-            <th>Date Plainte</th>
-            <th>Objet</th>
-            <th>Status</th>
-          </tr>
-          <tr>
-            <td>kjkj</td>
-            <td>kjh</td>
-            <td>jhg</td>
-            <td>kjkj</td>
-          </tr>
-        </table>
+        </div>
       </div>
     </div>
+
     <div class="col-md-6">
       <div class="row">
         <div class="col-md-6">
@@ -43,7 +33,7 @@
             <div class="card-block">
               <h6 class="mb-4">Total des Plaintes</h6>
               <h2 class="text-right">
-                <i class="fa fa-poll f-left"></i><span>{{ nbr }}</span>
+                <i class="fa fa-globe f-left"></i><span class="f-right">{{ nbr }}</span>
               </h2>
             </div>
           </div>
@@ -51,7 +41,7 @@
             <div class="card-block">
               <h6 class="mb-4">Plaintes Enregistrée</h6>
               <h2 class="text-right">
-                <i class="fa fa-bookmark f-left"></i><span>486</span>
+                <i class="fa fa-bookmark f-left"></i><span class="f-right">486</span>
               </h2>
             </div>
           </div>
@@ -59,7 +49,7 @@
             <div class="card-block">
               <h6 class="mb-4">Plaintes Traiteé</h6>
               <h2 class="text-right">
-                <i class="fa fa-sync f-left"></i><span>{{ nbrTraitee }}</span>
+                <i class="fa fa-check-circle f-left"></i><span class="f-right">{{ nbrTraitee }}</span>
               </h2>
             </div>
           </div>
@@ -69,7 +59,7 @@
             <div class="card-block">
               <h6 class="mb-4">Total des Plaintes Répondue</h6>
               <h2 class="text-right">
-                <i class="fa fa-reply f-left"></i><span>486</span>
+                <i class="fa fa-reply f-left"></i><span class="f-right">486</span>
               </h2>
             </div>
           </div>
@@ -78,7 +68,7 @@
               <h6 class="mb-4">Plaintes En Cours</h6>
               <h2 class="text-right">
                 <i class="fa fa-spinner f-left"></i
-                ><span>{{ nbrEnCours }}</span>
+                ><span class="f-right">{{ nbrEnCours }}</span>
               </h2>
             </div>
           </div>
@@ -86,7 +76,7 @@
             <div class="card-block">
               <h6 class="mb-4">Total des Dossiers</h6>
               <h2 class="text-right">
-                <i class="fa fa-folder f-left"></i><span>{{ nbrDossier }}</span>
+                <i class="fa fa-folder f-left"></i><span class="f-right">{{ nbrDossier }}</span>
               </h2>
             </div>
           </div>

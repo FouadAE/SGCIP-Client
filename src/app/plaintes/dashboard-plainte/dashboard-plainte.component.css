@@ -1,0 +1,15 @@
+.countainer{
+  background-color: #c9daec;
+}
+.card{
+  margin: 10px;
+}
+#nbrShow{
+  margin-bottom: 10px;
+}
+th{
+  text-align: center;
+}
+td{
+  text-align: center;
+}

@@ -28,7 +28,7 @@ export class StatistiquesPlainteComponent implements OnInit {
   }
 
   nombreTotalPlainteFunc() {
-    this.statistiquesService.nbrTotalPlainteFunc().subscribe(
+    this.statistiquesService.findAll().subscribe(
       data => {
         this.nbr = Object.keys(data).length;
         this.plaintes = data;

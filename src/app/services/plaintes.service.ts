@@ -45,7 +45,7 @@ export class PlaintesService {
       data => {
         if (data > 0) {
           alert('saved succesfully !');
-        } else alert('oho makhdamch ' + data);
+        } else alert('voila data  ' + data);
       }, error => {
         alert(error);
       }
@@ -56,8 +56,8 @@ export class PlaintesService {
     return this.http.post(this.url+'plainte/critere', this._vo);
   }
 
-  nbrTotalPlainteFunc() {
-    return this.http.get<Array<Plainte>>(this.url + 'plainte/');
+  rechercheNumDordre() {
+    return this.http;
   }
 
   nbrPlainteTraitee() {
@@ -65,7 +65,7 @@ export class PlaintesService {
   }
 
   nbrPlainteEnCours() {
-    return this.http.get(this.url + 'plainte/status/statusName/en coure');
+    return this.http.get(this.url + 'plainte/status/statusName/encours');
   }
 
   nbrPlaintePasEncore() {
@@ -76,8 +76,48 @@ export class PlaintesService {
     return this.http.get(this.url + 'dossier/');
   }
 
-  findByCreatedDateBetween(startdate: any, enddate: any){
-    return this.http.get<Array<Plainte>>(this.url + 'plainte/createddatbetween/endDate/' + enddate + '/startdate/' + startdate);
+  nbrTypePlainte() {
+    return this.http.get(this.url + 'plainte/type/plainte');
   }
+
+  nbrTypeProposition() {
+    return this.http.get(this.url + 'plainte/type/proposition');
+  }
+
+  nbrTypeRemarque() {
+    return this.http.get(this.url + 'plainte/type/remarque');
+  }
+
+  nbrDivCabinet() {
+    return this.http.get(this.url + 'plainte/division/ref/Cabinet');
+  }
+
+  nbrDivSecGeneral() {
+    return this.http.get(this.url + 'plainte/division/ref/secrétariat général');
+  }
+
+  nbrDivAffInterieur() {
+    return this.http.get(this.url + 'plainte/division/ref/Division des affaires intérieures');
+  }
+
+  findAll() {
+    return this.http.get<Array<Plainte>>(this.url + 'plainte/');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

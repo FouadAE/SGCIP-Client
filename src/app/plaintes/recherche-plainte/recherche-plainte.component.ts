@@ -38,8 +38,9 @@ export class RecherchePlainteComponent implements OnInit {
         } else {
           this.findOrNot = false;
         }
+        console.log(data);
       }, error => {
-        alert('ha error ' + error);
+        alert('error' + error);
       }
     );
   }
