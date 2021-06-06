@@ -1,53 +1,15 @@
-.order-card {
-  color: #fff;
+.countainer {
+  background-color: #c9daec;
 }
-
-.bg-c-blue {
-  background: #007fff;
-}
-
-.bg-c-green {
-  background: #4fffb0;
-}
-
-.bg-c-yellow {
-  background: #febe10;
-}
-
-.bg-c-pink {
-  background: #f9629f;
-}
-
-.bg-c-red {
-  background: #ff033e;
-}
-
-.bg-c-purple {
-  background: #662d91;
-}
-
 .card {
-  border-radius: 5px;
-  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-  border: none;
-  margin-bottom: 30px;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  margin: 10px;
 }
-
-.card .card-block {
-  padding: 25px;
+#nbrShow {
+  margin-bottom: 10px;
 }
-
-.order-card i {
-  font-size: 26px;
+th {
+  text-align: center;
 }
-
-.f-left {
-  float: left;
-}
-
-.f-right {
-  float: right;
+td {
+  text-align: center;
 }

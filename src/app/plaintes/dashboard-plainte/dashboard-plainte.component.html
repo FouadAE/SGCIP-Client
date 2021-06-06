@@ -1,82 +1,96 @@
-<div class="card">
-  <div class="card-header">
-    <h1>Nombre de Plainte par : <select name="chart" id="chart" class="form-select" [(ngModel)]="nbrPlaintPar" (change)="chartFunction()">
-      <option value="status">Status</option>
-      <option value="type">Type</option>
-      <option value="division">Division</option>
-    </select></h1>
-  </div>
-  <div class="card-body">
-
-    <p-chart type="pie" [data]="data"></p-chart>
-  </div>
-
-</div>
-
-<div class="card">
-  <div class="card-body">
-    <h4>Liste des plaintes:</h4>
-    <div><p>Extraire sous forme:</p></div>
-    <div class="col-md-4 text-right">
-      <button class="btn btn-success btn-block" >Télécharger PDF</button>
-    </div>
-    <div class="row">
-      <div class="col-md-2" id="nbrShow"><label>Afficher:</label>
-        <select name="nbrShow"  class="form-control form-select select ">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
+<div class="countainer mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h6 class="mb-4">Total des Plaintes</h6>
+          <h2 class="text-right">
+            <i class="fa fa-globe f-left"></i
+            ><span class="f-right">{{ nbr }}</span>
+          </h2>
+        </div>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-3"></div>
-      <div class="col-md-3">
-        <span><label>Recherche Par Status Plainte :</label>
-          <input type="text" class="form-control" [(ngModel)]="searchBy" (change)="rechercheParNumDordre()">
-         </span></div>
     </div>
-    <div class="container" id="htmlData" #content>
-
-      <div class="table-responsive" >
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th scope="col" >Numero d'ordre</th>
-            <th scope="col" >Action </th>
-            <th scope="col">Réponse </th>
-            <th scope="col">Objet </th>
-            <th scope="col">Date </th>
-            <th scope="col">Type Plainte </th>
-            <th scope="col">Status </th>
-            <th scope="col">Dossier </th>
-
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let r of plaintes">
-            <td>{{r.numeroDOrdre}}</td>
-
-            <td>
-              <span><i class="fa  btn btn-primary fa-edit mr-2"></i></span>
-              <span><i class="fa  btn btn-danger fa-eye fa-remove mr-2"></i></span>
-              <span><i class="fa  btn btn-danger fa-trash fa-remove mr-2"></i></span>
-            </td>
-            <td><span><i class="fa  btn btn-primary btn-success  mr-2">Ajouter Réponse</i></span></td>
-            <td>{{r.objet}}</td>
-            <td>{{r.createdAt}}</td>
-            <td>{{r.type}}</td>
-            <td>{{r.status.statusName}}</td>
-            <td>{{r.dossier.ref}}</td>
-
-          </tr>
-          </tbody>
-        </table>
+    <div class="col-md-4">
+      <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h6 class="mb-4">Plaintes Enregistrée</h6>
+          <h2 class="text-right">
+            <i class="fa fa-bookmark f-left"></i
+            ><span class="f-right">486</span>
+          </h2>
+        </div>
       </div>
-
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-c-yellow order-card">
+        <div class="card-block">
+          <h6 class="mb-4">Plaintes Traiteé</h6>
+          <h2 class="text-right">
+            <i class="fa fa-check-circle f-left"></i
+            ><span class="f-right">{{ nbrTraitee }}</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h6 class="mb-4">Total des Plaintes Répondue</h6>
+          <h2 class="text-right">
+            <i class="fa fa-reply f-left"></i><span class="f-right">486</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-c-red order-card">
+        <div class="card-block">
+          <h6 class="mb-4">Plaintes En Cours</h6>
+          <h2 class="text-right">
+            <i class="fa fa-spinner f-left"></i
+            ><span class="f-right">{{ nbrEnCours }}</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-c-purple order-card">
+        <div class="card-block">
+          <h6 class="mb-4">Total des Dossiers</h6>
+          <h2 class="text-right">
+            <i class="fa fa-folder f-left"></i
+            ><span class="f-right">{{ nbrDossier }}</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" id="first-card">
+        <div><h4>Les Dernier Plainte</h4></div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Numero d'ordre</th>
+                <th>Date Plainte</th>
+                <th>Objet</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of plaintes">
+                <td>{{ p.numeroDOrdre }}</td>
+                <td>{{ p.createdAt }}</td>
+                <td>{{ p.dossier.ref }}</td>
+                <td>{{ p.status.statusName }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-

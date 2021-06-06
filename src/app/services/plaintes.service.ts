@@ -56,8 +56,8 @@ export class PlaintesService {
     return this.http.post(this.url+'plainte/critere', this._vo);
   }
 
-  rechercheNumDordre() {
-    return this.http;
+  rechercheNumDordre(searchBy: String) {
+    return this.http.get<Array<Plainte>>(this.url + 'plainte/status/statusName/' + searchBy);
   }
 
   nbrPlainteTraitee() {
