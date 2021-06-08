@@ -4,44 +4,82 @@
       <h4>Recherche Par:</h4>
       <div class="row">
         <div class="col-md-6">
-          <span><label for="numOrdre">Numero D'ordre:</label><input type="text" id="numOrdre"
-                                                                    class="form-control" [(ngModel)]="Vo.numeroDOrdre"></span>
+          <span
+            ><label for="numOrdre">Numero D'ordre:</label
+            ><input
+              type="text"
+              id="numOrdre"
+              class="form-control"
+              [(ngModel)]="vo.numeroDOrdre"
+          /></span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <span><label for="status">Status:</label><select name="status" id="status" class="form-control form-select select"
-                                                           [(ngModel)]="Vo.status">
-            <option value="pasencore">Pas Encore</option>
-            <option value="traitee">Traitee</option>
-            <option value="encours">encours</option>
-          </select></span>
+          <span
+            ><label for="status">Status:</label
+            ><select
+              name="status"
+              id="status"
+              class="form-control form-select select"
+              [(ngModel)]="vo.status"
+            >
+              <option value="pasencore">Pas Encore</option>
+              <option value="traitee">Traitee</option>
+              <option value="encours">encours</option>
+            </select></span
+          >
         </div>
         <div class="col-md-4">
-          <span><label for="type">Type:</label><select name="type" id="type" class="form-control select form-select" [(ngModel)]="Vo.type">
-            <option value="palinte">Plainte</option>
-            <option value="proposition">Proposition</option>
-            <option value="remarque">Remarque</option>
-          </select></span>
+          <span
+            ><label for="type">Type:</label
+            ><select
+              name="type"
+              id="type"
+              class="form-control select form-select"
+              [(ngModel)]="vo.type"
+            >
+              <option value="palinte">Plainte</option>
+              <option value="proposition">Proposition</option>
+              <option value="remarque">Remarque</option>
+            </select></span
+          >
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <span><label for="datedepart">A partir de:</label><input type="date" id="datedepart"
-                                                                   class="form-control" [(ngModel)]="Vo.startDate"></span>
+          <span
+            ><label for="datedepart">A partir de:</label
+            ><input
+              type="date"
+              id="datedepart"
+              class="form-control"
+              [(ngModel)]="vo.startDate"
+          /></span>
         </div>
         <div class="col-md-6">
-          <span><label for="datefin">Jusqu'a:</label><input type="date" id="datefin" class="form-control" [(ngModel)]="Vo.endDate"></span>
+          <span
+            ><label for="datefin">Jusqu'a:</label
+            ><input
+              type="date"
+              id="datefin"
+              class="form-control"
+              [(ngModel)]="vo.endDate"
+          /></span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-5">
-          <button class="btn  mt-4 ml-md-1 btn-success" (click)="rechercheCritere()">lancer</button>
+          <button
+            class="btn mt-4 ml-md-1 btn-success"
+            (click)="rechercheCritere()"
+          >
+            lancer
+          </button>
         </div>
         <div class="alert alert-danger mt-2" role="alert" *ngIf="!findOrNot">
           Aucune Plainte Ne Ne Correspond Au Critere Inseré
         </div>
-
       </div>
     </div>
   </div>
@@ -50,11 +88,12 @@
       <h4>Resultat de la recherche:</h4>
       <div><p>Extraire sous forme:</p></div>
       <div class="col-md-4 text-right">
-        <button class="btn btn-success btn-block" >Download PDF</button>
+        <button class="btn btn-success btn-block">Download PDF</button>
       </div>
       <div class="row">
-        <div class="col-md-2" id="nbrShow"><label>Afficher:</label>
-          <select name="nbrShow"  class="form-control form-select select ">
+        <div class="col-md-2" id="nbrShow">
+          <label>Afficher:</label>
+          <select name="nbrShow" class="form-control form-select select">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -62,42 +101,50 @@
             <option value="5">5</option>
           </select>
         </div>
-
       </div>
       <div class="container" id="htmlData" #content>
-
-        <table class="table table-responsive ">
+        <table class="table table-responsive">
           <thead>
-          <tr>
-            <th scope="col">Action</th>
-            <th scope="col">Réponse</th>
-            <th scope="col">Numero d'ordre</th>
-            <th scope="col">Objet</th>
-            <th scope="col">Expediteur</th>
-            <th scope="col">Date</th>
-            <th scope="col">Type Plainte</th>
-            <th scope="col">Status</th>
-            <th scope="col">Dossier</th>
-            <th scope="col">Date</th>
-          </tr>
+            <tr>
+              <th scope="col">Action</th>
+              <th scope="col">Réponse</th>
+              <th scope="col">Numero d'ordre</th>
+              <th scope="col">Objet</th>
+              <th scope="col">Expediteur</th>
+              <th scope="col">Date</th>
+              <th scope="col">Type Plainte</th>
+              <th scope="col">Status</th>
+              <th scope="col">Dossier</th>
+              <th scope="col">Date</th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let r of resultCritere ">
-            <td>
-              <span><i class="fa  btn btn-primary fa-edit mr-2"></i></span>
-              <span><i class="fa  btn btn-danger fa-eye fa-remove mr-2"></i></span>
-              <span><i class="fa  btn btn-danger fa-trash fa-remove mr-2"></i></span>
-            </td>
-            <td><span><i class="fa  btn btn-primary btn-success  mr-2">Ajouter Réponse</i></span></td>
-            <td>{{r.numeroDOrdre}}</td>
-            <td>{{r.objet}}</td>
-            <td>{{r.expediteur}}</td>
-            <td>{{r.createdAt}}</td>
-            <td>{{r.type}}</td>
-            <td>{{r.status.statusName}}</td>
-            <td>{{r.dossier.ref}}</td>
-            <td>{{r.createdAt}}</td>
-          </tr>
+            <tr *ngFor="let r of resultCritere">
+              <td>
+                <span><i class="fa btn btn-primary fa-edit mr-2"></i></span>
+                <span
+                  ><i class="fa btn btn-danger fa-eye fa-remove mr-2"></i
+                ></span>
+                <span
+                  ><i class="fa btn btn-danger fa-trash fa-remove mr-2"></i
+                ></span>
+              </td>
+              <td>
+                <span
+                  ><i class="fa btn btn-primary btn-success mr-2"
+                    >Ajouter Réponse</i
+                  ></span
+                >
+              </td>
+              <td>{{ r.numeroDOrdre }}</td>
+              <td>{{ r.objet }}</td>
+              <td>{{ r.expediteur }}</td>
+              <td>{{ r.createdAt }}</td>
+              <td>{{ r.type }}</td>
+              <td>{{ r.status.statusName }}</td>
+              <td>{{ r.dossier.ref }}</td>
+              <td>{{ r.createdAt }}</td>
+            </tr>
           </tbody>
         </table>
       </div>

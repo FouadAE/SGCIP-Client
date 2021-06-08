@@ -1,9 +1,11 @@
+import { environment } from './../../environments/environment';
+
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-const AUTH_API = 'http://localhost:8036/api/auth/';
+const AUTH_API = environment.apiBaseUrl + 'api/sgcip/auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

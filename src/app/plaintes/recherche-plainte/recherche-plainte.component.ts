@@ -1,7 +1,7 @@
+import { Vo } from './../../controller/models/vo.model';
 import {Component, OnInit} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
-import {Vo} from "../../controller/models/vo.model";
 
 
 @Component({
@@ -11,6 +11,7 @@ import {Vo} from "../../controller/models/vo.model";
 })
 export class RecherchePlainteComponent implements OnInit {
 
+  public vo = new Vo();
   public resultCritere!: Array<Plainte>;
   public findOrNot = true;
 
@@ -20,17 +21,11 @@ export class RecherchePlainteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get Vo(): Vo {
-    return this.plainteservice.vo;
-  }
-
-
-
   rechercheCritere() {
     this.resultCritere = new Array<Plainte>();
-    if (this.Vo.endDate == null && this.Vo.startDate == null && this.Vo.status == null && this.Vo.type == null && this.Vo.numeroDOrdre == null)
+    if (this.vo.endDate == null && this.vo.startDate == null && this.vo.status == null && this.vo.type == null && this.vo.numeroDOrdre == null)
       return;
-    this.plainteservice.rechercheCritere().subscribe(
+    this.plainteservice.rechercheCritere(this.vo).subscribe(
       data => {
         if (Object.keys(data).length > 0) {
           this.resultCritere = data as Plainte[];
@@ -44,6 +39,5 @@ export class RecherchePlainteComponent implements OnInit {
       }
     );
   }
-
 
 }

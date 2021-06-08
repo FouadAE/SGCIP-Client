@@ -3,15 +3,8 @@
     <label>Dossier</label>
     <input list="dossier" name="dossier" [(ngModel)]="plainte.dossier.nom" />
     <datalist id="dossier">
-      <option value="dossier"></option>
-      <option value="dossier2"></option>
-      <option value="dossier3"></option>
+      <option *ngFor="let d of dossiers" value="{{ d.nom }}"></option>
     </datalist>
-    <!-- <select name="dossier" [(ngModel)]="plainte.dossier.nom">
-      <option value="dossier">Dossier1</option>
-      <option value="dossier2">Dossier2</option>
-      <option value="dossier3">Dossier3</option>
-    </select> -->
   </div>
   <div class="card card-2">
     <div class="card-header">Information Plainte</div>
@@ -72,9 +65,10 @@
               id="dividion"
               [(ngModel)]="plainte.division.ref"
             >
-              <option value="Cabinet">Cabinet</option>
-              <option value="Division des affaires intérieures">Division Des Affaires Intérieures</option>
-              <option value="secrétariat général">Secrétariat Général</option>
+              <option
+                *ngFor="let d of divisions"
+                value="{{ d.nomDivision }}"
+              ></option>
             </select>
           </span>
         </div>
@@ -131,9 +125,10 @@
               id="statu"
               [(ngModel)]="plainte.status.statusName"
             >
-              <option value="pasencore">s1</option>
-              <option value="traitee">s2</option>
-              <option value="en coure">s3</option>
+              <option
+                *ngFor="let d of divisions"
+                value="{{ d.statusName }}"
+              ></option>
             </select>
           </span>
         </div>
