@@ -69,5 +69,5 @@ export class PlaintesService {
   findAll() {
     return this.http.get<Array<Plainte>>(this.apiServerUrl + 'plainte/');
   }
-  
+
 }

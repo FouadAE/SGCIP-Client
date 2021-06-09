@@ -20,7 +20,7 @@ export class AjouterPlainteComponent implements OnInit {
   public divisions = new Array<Division>();
   public statusT = new Array<Status>();
   constructor(
-    private plaintesService: PlaintesService, 
+    private plaintesService: PlaintesService,
     private dossierService: DossierService,
     private divisionService: DivisionService,
     private statusService: StatusService
@@ -42,6 +42,7 @@ export class AjouterPlainteComponent implements OnInit {
     return this.dossierService.findAll().subscribe(
       data => {
         this.dossiers = data;
+        console.log(this.dossiers);
       }, error =>{
         console.log(error);
       }
@@ -61,7 +62,7 @@ export class AjouterPlainteComponent implements OnInit {
   public findAllStatus(){
     return this.statusService.findAll().subscribe(
       data => {
-        this.statusT = data;
+        this.statusT = data ;
       }, error =>{
         console.log(error);
       }
@@ -69,6 +70,10 @@ export class AjouterPlainteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.findAllDossiers();
+    this.findAllDivisions();
+    this.findAllStatus();
+
   }
 
 }
