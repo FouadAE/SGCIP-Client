@@ -1,4 +1,4 @@
-import { Vo } from './../../controller/models/vo.model';
+import { Vo } from '../../controller/models/vo.model';
 import {Component, OnInit} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
@@ -33,7 +33,6 @@ export class RecherchePlainteComponent implements OnInit {
         } else {
           this.findOrNot = false;
         }
-        console.log(data);
       }, error => {
         alert('error' + error);
       }

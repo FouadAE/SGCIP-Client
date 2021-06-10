@@ -9,6 +9,12 @@ import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
 import {Theme} from "../../controller/models/theme.model";
 import {ThemeService} from "../../services/theme.service";
+import {RClass} from "../../controller/models/rclass.model";
+import {RclassService} from "../../services/rclass.service";
+import {PlainteDepart} from "../../controller/models/plainte-depart.model";
+import {PlainteDepartService} from "../../services/plainte-depart.service";
+import {Instruction} from "../../controller/models/instruction.model";
+import {InstructionService} from "../../services/instruction.service";
 
 @Component({
   selector: 'app-ajouter-plainte',
@@ -22,13 +28,19 @@ export class AjouterPlainteComponent implements OnInit {
   public divisions = new Array<Division>();
   public statusT = new Array<Status>();
   public themes = new Array<Theme>();
+  public clases = new Array<RClass>();
+  public plaintesDepart = new Array<PlainteDepart>();
+  public instructions= new Array<Instruction>();
 
   constructor(
     private plaintesService: PlaintesService,
     private dossierService: DossierService,
     private divisionService: DivisionService,
     private statusService: StatusService,
-    private themeservice: ThemeService
+    private themeservice: ThemeService,
+    private rclassService: RclassService,
+    private plainteDepartService: PlainteDepartService,
+    private instructionService: InstructionService
   ) {
   }
 
@@ -86,11 +98,46 @@ export class AjouterPlainteComponent implements OnInit {
     )
   }
 
+  public findAllRClass() {
+    this.rclassService.findAll().subscribe(
+      data => {
+        console.log(data);
+        this.clases = data as RClass[];
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  public findAllPlainteDepart() {
+    this.plainteDepartService.findAll().subscribe(
+      data => {
+        console.log(data);
+        this.plaintesDepart = data as PlainteDepart[];
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+  public findAllInstructions() {
+    this.instructionService.findAll().subscribe(
+      data => {
+        console.log(data);
+        this.instructions = data as Instruction[];
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
   ngOnInit(): void {
     this.findAllDossiers();
     this.findAllDivisions();
     this.findAllStatus();
     this.findAllThemes();
+    this.findAllRClass();
+    this.findAllPlainteDepart();
+    this.findAllInstructions();
 
   }
 

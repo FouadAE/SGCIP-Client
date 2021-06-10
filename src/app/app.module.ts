@@ -26,6 +26,7 @@ import {ChartModule} from "primeng/chart";
 import {CardModule} from "primeng/card";
 import { NoAccesComponent } from './component/no-acces/no-acces.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     FormsModule,
     HttpClientModule,
     ChartModule,
-    CardModule
+    CardModule,
+    ButtonModule
   ],
   providers: [SharingDataService, AuthGuardService],
   bootstrap: [AppComponent]

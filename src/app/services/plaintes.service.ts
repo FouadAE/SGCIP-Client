@@ -1,5 +1,5 @@
-import { Plainte } from './../controller/models/plainte.model';
-import { environment } from './../../environments/environment';
+import { Plainte } from '../controller/models/plainte.model';
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Vo} from "../controller/models/vo.model";
@@ -22,7 +22,7 @@ export class PlaintesService {
     return this.http.post(this.apiServerUrl+'plainte/critere', vo);
   }
 
-  rechercheNumDordre(searchBy: String) {
+  rechercheNumDordre(searchBy: any) {
     return this.http.get<Array<Plainte>>(this.apiServerUrl + 'plainte/status/statusName/' + searchBy);
   }
 
