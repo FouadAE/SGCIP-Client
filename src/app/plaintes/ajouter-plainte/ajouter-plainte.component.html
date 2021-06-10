@@ -181,16 +181,15 @@
         </div>
         <div class="col-md-4">
           <span
-            ><label>Type</label>
+            ><label>Theme</label>
             <select
               name="type"
               class="form-select select form-control"
               id="type"
               [(ngModel)]="plainte.theme.ref"
             >
-              <option value="theme">t1</option>
-              <option>t2</option>
-              <option>t3</option>
+              <option *ngFor="let t of themes">{{t.ref}}</option>
+
             </select>
           </span>
         </div>
