@@ -70,4 +70,8 @@ export class PlaintesService {
     return this.http.get<Array<Plainte>>(this.apiServerUrl + 'plainte/');
   }
 
+  findBynumeroDordre(index: number){
+    return this.http.get<Plainte>(this.apiServerUrl + 'plainte/numeroDOrdre'+ index);
+  }
+
 }

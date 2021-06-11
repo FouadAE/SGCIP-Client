@@ -14,6 +14,8 @@ export class RecherchePlainteComponent implements OnInit {
   public vo = new Vo();
   public resultCritere!: Array<Plainte>;
   public findOrNot = true;
+  public showFichier = false;
+  public plainte = new Plainte();
 
   constructor(private plainteservice: PlaintesService) {
   }
@@ -35,6 +37,18 @@ export class RecherchePlainteComponent implements OnInit {
         }
       }, error => {
         alert('error' + error);
+      }
+    );
+  }
+
+  toggleFichier(index: number){
+    this.showFichier = !this.showFichier;
+    let numeroDOrdre = this.resultCritere[index].numeroDOrdre;
+    this.plainteservice.findBynumeroDordre(numeroDOrdre).subscribe(
+      data => {
+        this.plainte = data;
+      }, error => {
+        console.log(error);
       }
     );
   }
