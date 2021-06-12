@@ -27,6 +27,8 @@ import {CardModule} from "primeng/card";
 import { NoAccesComponent } from './component/no-acces/no-acces.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import {ButtonModule} from "primeng/button";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import {ButtonModule} from "primeng/button";
     HttpClientModule,
     ChartModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [SharingDataService, AuthGuardService],
   bootstrap: [AppComponent]

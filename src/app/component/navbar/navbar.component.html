@@ -38,7 +38,7 @@
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active" *ngIf="isLoggedInf()">
         <a class="nav-link" routerLink="/welcome"
-        >Home <span class="sr-only">(current)</span></a
+          >Home <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item" *ngIf="isLoggedInf()">
@@ -58,9 +58,8 @@
       </li>
       <li
         class="nav-item dropdown nav__item--account"
-        [ngClass]="{ show: showDropdown }"
         *ngIf="isLoggedInf()"
-        (click)="toogleDropdown()"
+        dropdown
       >
         <a
           class="nav-link"
@@ -68,26 +67,27 @@
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
-          attr.aria-expanded="{{ showDropdown }}"
+          aria-expanded="false"
+          dropdownToggle
         >
-          <img src="assets/images/cd-avatar.svg" alt="#"/>
+          <img src="assets/images/cd-avatar.svg" alt="#" />
           <span class="ml-2"> {{ getUser().username }}</span>
         </a>
         <div
           class="dropdown-menu dropdown-menu-right"
-          [ngClass]="{ show: showDropdown }"
           aria-labelledby="navbarDropdown"
+          *dropdownMenu
         >
-          <a class="dropdown-item" href="#"
-          ><span><i class="fa fa-user"></i></span> Profile</a
-          >
-          <a class="dropdown-item" href="#"
-          ><span><i class="fa fa-cog"></i></span> Settings</a
-          >
+          <a class="dropdown-item" href="#">
+            <span><i class="fa fa-user"></i></span> Profile
+          </a>
+          <a class="dropdown-item" href="#">
+            <span><i class="fa fa-cog"></i></span> Settings
+          </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="signOut()"
-          ><span><i class="fa fa-sign-out"></i></span> Logout</a
-          >
+          <a class="dropdown-item" href="#" (click)="signOut()">
+            <span><i class="fa fa-sign-out"></i></span> Logout
+          </a>
         </div>
       </li>
       <li class="nav-item" *ngIf="!isLoggedInf()">
