@@ -29,6 +29,10 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import {ButtonModule} from "primeng/button";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {BsModalService, ModalModule} from "ngx-bootstrap/modal";
+import {NgxPrintModule} from "ngx-print";
+import {ComponentLoaderFactory} from "ngx-bootstrap/component-loader";
+import {PositioningService} from "ngx-bootstrap/positioning";
 
 @NgModule({
   declarations: [
@@ -60,9 +64,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CardModule,
     ButtonModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule,
+    NgxPrintModule
   ],
-  providers: [SharingDataService, AuthGuardService],
+  providers: [SharingDataService, AuthGuardService,BsModalService,ComponentLoaderFactory,ComponentLoaderFactory,PositioningService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

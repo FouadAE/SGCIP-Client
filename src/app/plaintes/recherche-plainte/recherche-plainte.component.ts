@@ -1,7 +1,8 @@
 import { Vo } from '../../controller/models/vo.model';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
+import { BsModalService} from "ngx-bootstrap/modal";
 
 
 @Component({
@@ -14,10 +15,11 @@ export class RecherchePlainteComponent implements OnInit {
   public vo = new Vo();
   public resultCritere!: Array<Plainte>;
   public findOrNot = true;
-  public showFichier = false;
   public plainte = new Plainte();
+  modalRef!: any;
 
-  constructor(private plainteservice: PlaintesService) {
+
+  constructor(private plainteservice: PlaintesService,private modalService:BsModalService) {
   }
 
   ngOnInit(): void {
@@ -41,11 +43,17 @@ export class RecherchePlainteComponent implements OnInit {
     );
   }
 
-  toggleFichier(index: number){
-    this.showFichier = !this.showFichier;
+
+
+  openModalWithClass(template: TemplateRef<any>, index: number) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, {class: 'gray modal-lg'})
+    );
     let numeroDOrdre = this.resultCritere[index].numeroDOrdre;
     this.plainteservice.findBynumeroDordre(numeroDOrdre).subscribe(
       data => {
+        console.log(data);
         this.plainte = data;
       }, error => {
         console.log(error);

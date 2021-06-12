@@ -5,25 +5,25 @@
       <div class="row">
         <div class="col-md-6">
           <span
-            ><label for="numOrdre">Numero D'ordre:</label
-            ><input
-              type="text"
-              id="numOrdre"
-              class="form-control"
-              [(ngModel)]="vo.numeroDOrdre"
+          ><label for="numOrdre">Numero D'ordre:</label
+          ><input
+            type="text"
+            id="numOrdre"
+            class="form-control"
+            [(ngModel)]="vo.numeroDOrdre"
           /></span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <span
-            ><label for="status">Status:</label
-            ><select
-              name="status"
-              id="status"
-              class="form-control form-select select"
-              [(ngModel)]="vo.status"
-            >
+          ><label for="status">Status:</label
+          ><select
+            name="status"
+            id="status"
+            class="form-control form-select select"
+            [(ngModel)]="vo.status"
+          >
               <option value="pasencore">Pas Encore</option>
               <option value="traitee">Traitee</option>
               <option value="encours">encours</option>
@@ -32,13 +32,13 @@
         </div>
         <div class="col-md-4">
           <span
-            ><label for="type">Type:</label
-            ><select
-              name="type"
-              id="type"
-              class="form-control select form-select"
-              [(ngModel)]="vo.type"
-            >
+          ><label for="type">Type:</label
+          ><select
+            name="type"
+            id="type"
+            class="form-control select form-select"
+            [(ngModel)]="vo.type"
+          >
               <option value="palinte">Plainte</option>
               <option value="proposition">Proposition</option>
               <option value="remarque">Remarque</option>
@@ -49,22 +49,22 @@
       <div class="row">
         <div class="col-md-6">
           <span
-            ><label for="datedepart">A partir de:</label
-            ><input
-              type="date"
-              id="datedepart"
-              class="form-control"
-              [(ngModel)]="vo.startDate"
+          ><label for="datedepart">A partir de:</label
+          ><input
+            type="date"
+            id="datedepart"
+            class="form-control"
+            [(ngModel)]="vo.startDate"
           /></span>
         </div>
         <div class="col-md-6">
           <span
-            ><label for="datefin">Jusqu'a:</label
-            ><input
-              type="date"
-              id="datefin"
-              class="form-control"
-              [(ngModel)]="vo.endDate"
+          ><label for="datefin">Jusqu'a:</label
+          ><input
+            type="date"
+            id="datefin"
+            class="form-control"
+            [(ngModel)]="vo.endDate"
           /></span>
         </div>
       </div>
@@ -86,10 +86,6 @@
   <div class="card">
     <div class="card-body">
       <h4>Resultat de la recherche:</h4>
-      <div><p>Extraire sous forme:</p></div>
-      <div class="col-md-4 text-right">
-        <button class="btn btn-success btn-block">Download PDF</button>
-      </div>
       <div class="row">
         <div class="col-md-2" id="nbrShow">
           <label>Afficher:</label>
@@ -105,100 +101,110 @@
       <div class="container" id="htmlData" #content>
         <table class="table table-responsive">
           <thead>
-            <tr>
-              <th scope="col">Action</th>
-              <th scope="col">Réponse</th>
-              <th scope="col">Numero d'ordre</th>
-              <th scope="col">Objet</th>
-              <th scope="col">Expediteur</th>
-              <th scope="col">Date</th>
-              <th scope="col">Type Plainte</th>
-              <th scope="col">Status</th>
-              <th scope="col">Dossier</th>
-              <th scope="col">Date</th>
-            </tr>
+          <tr>
+            <th scope="col">Action</th>
+            <th scope="col">Réponse</th>
+            <th scope="col">Numero d'ordre</th>
+            <th scope="col">Objet</th>
+            <th scope="col">Expediteur</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type Plainte</th>
+            <th scope="col">Status</th>
+            <th scope="col">Dossier</th>
+            <th scope="col">Date</th>
+          </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let r of resultCritere; index as i">
-              <td>
-                <span><i class="fa btn btn-primary fa-edit mr-2"></i></span>
-                <!-- Button trigger modal -->
-                <button
-                  type="button"
-                  class="btn btn-danger mr-2"
-                  data-toggle="modal"
-                  data-target="#fichierPlainte"
-                  (click)="toggleFichier(i)"
-                >
+          <tr *ngFor="let r of resultCritere; index as i">
+            <td>
+              <span><i class="fa btn btn-primary fa-edit mr-2"></i></span>
+              <!-- Button trigger modal -->
+              <i
+                class="fa btn btn-danger mr-2 "
+                data-toggle="modal"
+                data-target="#fichierPlainte"
+                (click)="openModalWithClass(template,i)"
+              >
                   <span>
                     <i class="fa fa-eye fa-remove"></i>
                   </span>
-                </button>
-                <span>
+              </i>
+              <span>
                   <i class="fa btn btn-danger fa-trash fa-remove mr-2"></i>
                 </span>
-              </td>
-              <td>
+            </td>
+            <td>
                 <span>
                   <i class="fa btn btn-primary btn-success mr-2">
                     Ajouter Réponse
                   </i>
                 </span>
-              </td>
-              <td>{{ r.numeroDOrdre }}</td>
-              <td>{{ r.objet }}</td>
-              <td>{{ r.expediteur }}</td>
-              <td>{{ r.datePlainte }}</td>
-              <td>{{ r.type }}</td>
-              <td>{{ r.status.statusName }}</td>
-              <td>{{ r.dossier.nom }}</td>
-              <td>{{ r.createdAt }}</td>
-            </tr>
+            </td>
+            <td>{{ r.numeroDOrdre }}</td>
+            <td>{{ r.objet }}</td>
+            <td>{{ r.expediteur }}</td>
+            <td>{{ r.datePlainte }}</td>
+            <td>{{ r.type }}</td>
+            <td>{{ r.status.statusName }}</td>
+            <td>{{ r.dossier.nom }}</td>
+            <td>{{ r.createdAt }}</td>
+          </tr>
           </tbody>
         </table>
       </div>
       <!-- Modal -->
-      <div
-        class="modal fade"
-        [ngClass]="{
-          show: showFichier
-        }"
-        id="fichierPlainte"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="fichierPlainteTitle"
-        attr.aria-hidden="{{ showFichier }}"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="fichierPlainteTitle">Modal title</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Plainte de num : {{ palinte.numeroDOrdre }}
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                (click)="showFichier = !showFichier"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">Download</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Plainte détails:</h4>
+      <button type="button" id="btnClose" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" id="pdfDiv">
+      <div class="row">
+        <div class="col-md-4">Numero D'Ordre : {{ plainte.numeroDOrdre }}</div>
+        <div class="col-md-4">Date : {{ plainte.createdAt }}</div>
+        <div class="col-md-4">Objet : {{ plainte.objet }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Numero D'Envoi : {{ plainte.numeroEnvoi }}</div>
+        <div class="col-md-4">Observation : {{ plainte.observation }}</div>
+        <div class="col-md-4">Source : {{ plainte.source }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Type : {{ plainte.type }}</div>
+        <div class="col-md-4">Visa : {{ plainte.visa }}</div>
+        <div class="col-md-4">Expediteur : {{ plainte.expediteur }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Plainte Depart : {{ plainte.plainteDepart }}</div>
+        <div class="col-md-4">Division : {{ plainte.division.nomDivision }}</div>
+        <div class="col-md-4">Instruction : {{ plainte.instruction.nom }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Theme : {{ plainte.theme.ref }}</div>
+        <div class="col-md-4">Dossier : {{ plainte.dossier.nom }}</div>
+        <div class="col-md-4">Status : {{ plainte.status.statusName }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Class : {{ plainte.pClasse.nom }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <button class="fa btn fa-file-pdf-o btn-lg" id="btnpdf" printSectionId="pdfDiv" [useExistingCss]="true" ngxPrint></button>
+      </div>
+    </div>
+
+
+  </ng-template>
 </div>

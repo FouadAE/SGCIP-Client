@@ -17,3 +17,12 @@ button {
 #nbrShow {
   margin-bottom: 10px;
 }
+#btnClose{
+  width: 30px;
+  background-color: #ffffff;
+  border: none;
+}
+#btnpdf{
+  width: 200px;
+  margin-bottom: 5px;
+}

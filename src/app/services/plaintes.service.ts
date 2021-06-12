@@ -71,7 +71,7 @@ export class PlaintesService {
   }
 
   findBynumeroDordre(index: number){
-    return this.http.get<Plainte>(this.apiServerUrl + 'plainte/numeroDOrdre'+ index);
+    return this.http.get<Plainte>(this.apiServerUrl + 'plainte/numeroDOrdre/'+ index);
   }
 
 }
