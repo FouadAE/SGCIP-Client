@@ -1,67 +1,99 @@
 <div class="countainer mt-4">
   <div class="row">
     <div class="col-md-4">
-      <div class="card bg-c-blue order-card">
-        <div class="card-block">
-          <h6 class="mb-4">Total des Plaintes</h6>
-          <h2 class="text-right">
-            <i class="fa fa-globe f-left"></i
-            ><span class="f-right">{{ nbr }}</span>
-          </h2>
+      <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">content_copy</i>
+          </div>
+          <p class="card-category">Total des Plaintes</p>
+          <h3 class="card-title">{{ nbr }}</h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">date_range</i> Last 24 Hours
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-c-green order-card">
-        <div class="card-block">
-          <h6 class="mb-4">Plaintes Enregistrée</h6>
-          <h2 class="text-right">
-            <i class="fa fa-bookmark f-left"></i
-            ><span class="f-right">486</span>
-          </h2>
+      <div class="card card-stats">
+        <div class="card-header card-header-success card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">check</i>
+          </div>
+          <p class="card-category">Plaintes Traiteé</p>
+          <h3 class="card-title">{{ nbrTraitee }}</h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">local_offer</i> Tracked from Github
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-c-yellow order-card">
-        <div class="card-block">
-          <h6 class="mb-4">Plaintes Traiteé</h6>
-          <h2 class="text-right">
-            <i class="fa fa-check-circle f-left"></i
-            ><span class="f-right">{{ nbrTraitee }}</span>
-          </h2>
+      <div class="card card-stats">
+        <div class="card-header card-header-danger card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">sync</i>
+          </div>
+          <p class="card-category">Plaintes En Cours</p>
+          <h3 class="card-title">{{ nbrEnCours }}</h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">warning</i>
+            Plaintes a repondu...
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-c-pink order-card">
-        <div class="card-block">
-          <h6 class="mb-4">Total des Plaintes Répondue</h6>
-          <h2 class="text-right">
-            <i class="fa fa-reply f-left"></i><span class="f-right">486</span>
-          </h2>
+      <div class="card card-stats">
+        <div class="card-header card-header-info card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">folder</i>
+          </div>
+          <p class="card-category">Total des Dossiers</p>
+          <h3 class="card-title">{{ nbrDossier }}</h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">update</i> Just Updated
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-c-red order-card">
-        <div class="card-block">
-          <h6 class="mb-4">Plaintes En Cours</h6>
-          <h2 class="text-right">
-            <i class="fa fa-spinner f-left"></i
-            ><span class="f-right">{{ nbrEnCours }}</span>
-          </h2>
+      <div class="card card-stats">
+        <div class="card-header card-header-Violet card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">replay</i>
+          </div>
+          <p class="card-category">Total des Plaintes Répondue</p>
+          <h3 class="card-title">245</h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">update</i> Just Updated
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-c-purple order-card">
-        <div class="card-block">
-          <h6 class="mb-4">Total des Dossiers</h6>
-          <h2 class="text-right">
-            <i class="fa fa-folder f-left"></i
-            ><span class="f-right">{{ nbrDossier }}</span>
-          </h2>
+      <div class="card card-stats">
+        <div class="card-header card-header-SlateBlue card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">bookmark</i>
+          </div>
+          <p class="card-category">Plaintes Enregistrée</p>
+          <h3 class="card-title">245</h3>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">update</i> Just Updated
+          </div>
         </div>
       </div>
     </div>

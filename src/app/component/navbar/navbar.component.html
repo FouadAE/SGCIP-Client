@@ -37,24 +37,24 @@
   >
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active" *ngIf="isLoggedInf()">
-        <a class="nav-link" routerLink="/welcome"
+        <a class="nav-link" routerLink="/welcome" routerLinkActive="active"
           >Home <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item" *ngIf="isLoggedInf()">
-        <a class="nav-link" routerLink="/visite">Visites</a>
+        <a class="nav-link" routerLink="/visite" routerLinkActive="active">Visites</a>
       </li>
       <li class="nav-item" *ngIf="isLoggedInf()">
-        <a class="nav-link" routerLink="/plainte">Plaintes</a>
+        <a class="nav-link" routerLink="/plainte" routerLinkActive="active">Plaintes</a>
       </li>
       <li class="nav-item" *ngIf="isLoggedInf()">
-        <a class="nav-link" routerLink="/contieux">Contieux</a>
+        <a class="nav-link" routerLink="/contieux routerLinkActive="active"">Contieux</a>
       </li>
       <li class="nav-item" *ngIf="isLoggedInf()">
-        <a class="nav-link" routerLink="/taches">Taches</a>
+        <a class="nav-link" routerLink="/taches" routerLinkActive="active">Taches</a>
       </li>
       <li class="nav-item" *ngIf="isLoggedInf()">
-        <a class="nav-link" routerLink="/reunion">Reunion</a>
+        <a class="nav-link" routerLink="/reunion" routerLinkActive="active">Reunion</a>
       </li>
       <li
         class="nav-item dropdown nav__item--account"
