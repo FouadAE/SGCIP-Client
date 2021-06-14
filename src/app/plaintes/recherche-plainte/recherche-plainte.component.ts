@@ -3,6 +3,19 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
 import { BsModalService} from "ngx-bootstrap/modal";
+import {Dossier} from "../../controller/models/dossier.model";
+import {PlainteDepart} from "../../controller/models/plainte-depart.model";
+import {Division} from "../../controller/models/division.model";
+import {Instruction} from "../../controller/models/instruction.model";
+import {RClass} from "../../controller/models/rclass.model";
+import {Status} from "../../controller/models/status.model";
+import {Theme} from "../../controller/models/theme.model";
+import {StatusService} from "../../services/status.service";
+import {PlainteDepartService} from "../../services/plainte-depart.service";
+import {RclassService} from "../../services/rclass.service";
+import {DivisionService} from "../../services/division.service";
+import {ThemeService} from "../../services/theme.service";
+import {InstructionService} from "../../services/instruction.service";
 
 
 @Component({
@@ -17,12 +30,41 @@ export class RecherchePlainteComponent implements OnInit {
   public findOrNot = true;
   public plainte = new Plainte();
   modalRef!: any;
+  public title = 'Fiche du Plainte :';
+  public plainteToModify!: Plainte;
+  public modifyOn = false;
+  public dossiers!: Array<Dossier>;
+  public statusT!: Array<Status>;
+  public plaintesDepart!: Array<PlainteDepart>;
+  public divisions!: Array<Division>;
+  public instructions!: Array<Instruction>;
+  public themes!: Array<Theme>;
+  public clases!: Array<RClass>;
 
 
-  constructor(private plainteservice: PlaintesService,private modalService:BsModalService) {
+  constructor(
+    private plainteservice: PlaintesService,
+    private modalService: BsModalService,
+    private statusService: StatusService,
+    private plainteDepartService: PlainteDepartService,
+    private divisionService: DivisionService,
+    private instructionService: InstructionService,
+    private themeService: ThemeService,
+    private rclassService: RclassService
+  ) {
+
+
+
   }
 
   ngOnInit(): void {
+    this.findAllDossiers();
+    this.findAllStatus();
+    this.findAllPlainteDepart();
+    this.findAllDivisions();
+    this.findAllInstructions();
+    this.findAllThemes();
+    this.findAllRClass();
   }
 
   rechercheCritere() {
@@ -59,6 +101,116 @@ export class RecherchePlainteComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  delete(r: Plainte, i: number) {
+    this.plainteservice.delete(r.numeroDOrdre).subscribe(
+      data => {
+        if (data) {
+          alert('element deleted successfully !');
+          this.resultCritere.splice(i, 1);
+          this.modifyOn = false;
+        }
+      }, error => {
+        alert(error);
+      }
+    );
+  }
+
+  modify(r: Plainte) {
+    this.plainteservice.findBynumeroDordre(r.numeroDOrdre).subscribe(
+      data => {
+        this.modifyOn = true;
+        this.plainteToModify = data;
+        console.log(this.plainteToModify);
+
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+
+  modifySave(plainteToModify: Plainte) {
+    this.plainteservice.modifyPlainte(plainteToModify).subscribe(
+      data => {
+        if (data > 0) {
+          alert('modification enregistrée avec succées !');
+        } else {
+          alert(data);
+        }
+      }, error => {
+        alert(error);
+      }
+    );
+  }
+
+  findAllDossiers() {
+    this.plainteservice.nbrPlainteDossier().subscribe(
+      data => {
+        this.dossiers = data as Dossier[];
+      }
+    )
+  }
+
+  findAllStatus() {
+    this.statusService.findAll().subscribe(
+      data => {
+        this.statusT = data as Status[];
+
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllPlainteDepart() {
+    this.plainteDepartService.findAll().subscribe(
+      data => {
+        this.plaintesDepart = data as PlainteDepart[];
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllDivisions() {
+    this.divisionService.findAll().subscribe(
+      data => {
+        this.divisions = data as Division[];
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllInstructions() {
+    this.instructionService.findAll().subscribe(
+      data => {
+        this.instructions = data as Instruction[];
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllThemes() {
+    this.themeService.findAll().subscribe(
+      data => {
+        this.themes = data as Theme[]
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllRClass() {
+    this.rclassService.findAll().subscribe(
+      data => {
+        this.clases = data as RClass[];
+      }, error => {
+        alert(error)
+      }
+    )
   }
 
 }

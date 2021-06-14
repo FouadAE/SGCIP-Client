@@ -151,7 +151,7 @@
               required
               #status="ngModel"
             >
-              <option *ngFor="let s of statusT">{{ s.statusFr }}</option>
+              <option *ngFor="let s of statusT">{{ s.statusName }}</option>
             </select>
             <div class="text-danger" *ngIf="status.touched && !status.valid">
               <div *ngIf="status.errors?.required">
@@ -300,16 +300,16 @@
       <div class="row">
         <div class="col-md-4">
           <span
-            ><label>Catégorie</label>
+          ><label>Type</label>
             <select
               name="categorie"
               class="form-select select form-control"
               id="categorie"
               [(ngModel)]="plainte.type"
             >
-              <option value="eau">cat1</option>
-              <option>cat2</option>
-              <option>cat3</option>
+                <option value="plainte">Plainte</option>
+              <option value="proposition">Proposition</option>
+              <option value="remarque">Remarque</option>
             </select>
           </span>
         </div>

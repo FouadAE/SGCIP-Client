@@ -117,20 +117,14 @@
           <tbody>
           <tr *ngFor="let r of resultCritere; index as i">
             <td>
-              <span><i class="fa btn btn-primary fa-edit mr-2"></i></span>
-              <!-- Button trigger modal -->
-              <i
-                class="fa btn btn-danger mr-2 "
-                data-toggle="modal"
-                data-target="#fichierPlainte"
-                (click)="openModalWithClass(template,i)"
-              >
-                  <span>
-                    <i class="fa fa-eye fa-remove"></i>
-                  </span>
+              <span><i class="fa btn btn-primary fa-edit mr-2" (click)="modify(r)"></i></span>
+              <i class="fa btn btn-danger mr-2 fa-eye fa-remove "
+                 data-toggle="modal"
+                 data-target="#fichierPlainte"
+                 (click)="openModalWithClass(template,i)">
               </i>
               <span>
-                  <i class="fa btn btn-danger fa-trash fa-remove mr-2"></i>
+                  <i class="fa btn btn-danger fa-trash fa-remove mr-2" (click)="delete(r,i)"></i>
                 </span>
             </td>
             <td>
@@ -201,10 +195,174 @@
     <div class="row">
       <div class="col-md-8"></div>
       <div class="col-md-4">
-        <button class="fa btn fa-file-pdf-o btn-lg" id="btnpdf" printSectionId="pdfDiv" [useExistingCss]="true" ngxPrint></button>
+        <button class="fa btn fa-file-pdf-o btn-lg" id="btnpdf" printSectionId="pdfDiv" [useExistingCss]="true" [printTitle]="title" styleSheetFile="assets/pdf.css" ngxPrint></button>
       </div>
     </div>
-
-
   </ng-template>
+
+  <div class="card" *ngIf="modifyOn">
+    <div class="card-header">
+      <h3>Modifier Plainte:</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4"><span><label>Numero DOrdre:</label><input type="number" class="form-control"
+                                                                        [(ngModel)]="plainteToModify.numeroDOrdre"
+                                                                        disabled></span></div>
+        <div class="col-md-4"><span><label>Dossier:</label><input
+          list="dossier"
+          name="dossier"
+          class="form-control"
+          [(ngModel)]="plainteToModify.dossier.nom"
+          required
+          #dossier="ngModel"
+        />
+    <datalist id="dossier">
+      <option selected value>{{plainteToModify.dossier.nom}}</option>
+      <option> {{plainteToModify.dossier.nom}} </option>
+    </datalist>
+    <div class="text-danger" *ngIf="dossier.touched && !dossier.valid">
+      <div *ngIf="dossier.errors?.required">**choisir une dossier</div>
+    </div></span></div>
+        <div class="col-md-4"><span><label>Objet :</label><input type="text" class="form-control"
+                                                                 [(ngModel)]="plainteToModify.objet"></span></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span><label>Numero D'Envoi:</label><input type="number" class="form-control"
+                                                                         [(ngModel)]="plainteToModify.numeroEnvoi"></span>
+        </div>
+        <div class="col-md-4"><span><label>Observation:</label><input type="text" class="form-control"
+                                                                      [(ngModel)]="plainteToModify.observation"></span>
+        </div>
+        <div class="col-md-4"><span><label>Date Plainte:</label><input type="date" class="form-control"
+                                                                       [(ngModel)]="plainteToModify.datePlainte"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span><label>Source:</label><input type="text" class="form-control"
+                                                                 [(ngModel)]="plainteToModify.source"></span></div>
+        <div class="col-md-4"><span><label>Type :</label><select name="type" class="form-control">
+          <option selected>{{plainteToModify.type}}</option>
+          <option value="proposition">Proposition</option>
+          <option value="plainte">Plainte</option>
+          <option value="remarque">Remarque</option>
+        </select>
+        </span></div>
+        <div class="col-md-4"><span><label>Visa :</label><input type="text" class="form-control"
+                                                                [(ngModel)]="plainteToModify.visa"></span></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span><label>Expediteur :</label><input type="text" class="form-control"
+                                                                      [(ngModel)]="plainteToModify.expediteur"></span>
+        </div>
+        <div class="col-md-4"><span
+        ><label>Plainte Depart</label>
+         <select
+           name="plainteDep"
+           class="form-select select form-control"
+           id="plainteDep"
+           [(ngModel)]="plainteToModify.plainteDepart.ref"
+           required
+           #plainteDep="ngModel"
+         >
+              <option selected>{{plainteToModify.plainteDepart.ref}}</option>
+              <option *ngFor="let p of plaintesDepart">{{ p.ref }}</option>
+            </select>
+            <div
+              class="text-danger"
+              *ngIf="plainteDep.touched && !plainteDep.valid"
+            >
+              <div *ngIf="plainteDep.errors?.required">
+                **veuillez choisir Plainte Depart
+              </div>
+            </div>
+          </span>
+        </div>
+        <div class="col-md-4"><span><label>Division :</label> <select
+          name="division"
+          class="form-select select form-control"
+          id="dividion"
+          [(ngModel)]="plainteToModify.division.ref"
+          required
+          #division="ngModel"
+        >     <option selected>{{plainteToModify.division.ref}}</option>
+              <option *ngFor="let d of divisions">{{ d.nomDivision }}</option>
+            </select></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span><label>Instruction :</label> <select
+          name="instruction"
+          class="form-select select form-control"
+          id="instruction"
+          [(ngModel)]="plainteToModify.instruction.ref"
+          required
+          #instruction="ngModel"
+        >     <option selected>{{plainteToModify.instruction.ref}}</option>
+              <option *ngFor="let i of instructions">{{ i.nom }}</option>
+            </select></span>
+        </div>
+        <div class="col-md-4"><span><label>Theme :</label>
+          <select
+            name="theme"
+            class="form-select select form-control"
+            id="theme"
+            [(ngModel)]="plainteToModify.theme.ref"
+            required
+            #theme="ngModel"
+          >   <option selected>{{plainteToModify.theme.ref}}</option>
+              <option *ngFor="let t of themes">{{ t.ref }}</option>
+            </select>
+        </span></div>
+        <div class="col-md-4"><span><label>Dossier :</label><input type="text" class="form-control"
+                                                                   [(ngModel)]="plainteToModify.dossier.nom"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"> <span
+        ><label>Status</label>
+            <select
+              name="status"
+              class="form-select select form-control"
+              id="statu"
+              [(ngModel)]="plainteToModify.status.statusName"
+              required
+              #status="ngModel"
+            >
+              <option selected>{{plainteToModify.status.statusName}}</option>
+              <option *ngFor="let s of statusT">{{ s.statusFr }}</option>
+            </select>
+            <div class="text-danger" *ngIf="status.touched && !status.valid">
+              <div *ngIf="status.errors?.required">
+                **veuillez choisir le status du plainte
+              </div>
+            </div>
+          </span></div>
+        <div class="col-md-4"><span><label>Classe :</label>
+        <select
+          name="classe"
+          class="form-select select form-control"
+          id="classe"
+          [(ngModel)]="plainteToModify.pClasse.ref"
+          required
+          #class="ngModel"
+        >     <option selected>{{plainteToModify.pClasse.ref}}</option>
+              <option *ngFor="let c of clases">{{ c.ref }}</option>
+            </select>
+        </span>
+        </div>
+        <div class="col-md-4"><span><label>Publie :</label><input type="text" class="form-control"
+                                                                  [(ngModel)]="plainteToModify.publie"></span></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <button class="btn fa btn-primary fa fa-edit mt-2 bg-gradient  " (click)="modifySave(plainteToModify)">
+            Enregistrer les modifications !
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
