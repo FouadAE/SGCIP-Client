@@ -33,6 +33,7 @@ import {BsModalService, ModalModule} from "ngx-bootstrap/modal";
 import {NgxPrintModule} from "ngx-print";
 import {ComponentLoaderFactory} from "ngx-bootstrap/component-loader";
 import {PositioningService} from "ngx-bootstrap/positioning";
+import { ListPlaintesComponent } from './plaintes/list-plaintes/list-plaintes.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {PositioningService} from "ngx-bootstrap/positioning";
     NotificationVisiteComponent,
     WelcomeComponent,
     NoAccesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ListPlaintesComponent
   ],
   imports: [
     BrowserModule,

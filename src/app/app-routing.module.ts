@@ -1,3 +1,4 @@
+import { ListPlaintesComponent } from './plaintes/list-plaintes/list-plaintes.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import {NgModule} from '@angular/core';
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'dashboard-plainte',
         component: DashboardPlainteComponent
+      },
+      {
+        path: 'liste-plainte',
+        component: ListPlaintesComponent
       },
       {
         path: 'ajouter-plainte',

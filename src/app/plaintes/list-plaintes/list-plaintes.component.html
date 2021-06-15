@@ -1,0 +1,748 @@
+<div class="row my-2">
+  <div class="col-md-10 mx-2">
+    <h4>Liste des Plaintes</h4>
+  </div>
+  <div class="col-md-1 text-right">
+    <a routerLink="ajouter-plainte">
+      <button class="btn btn-sm btn-primary">
+        <i class="fa fa-plus"></i>Nouveau Plainte
+      </button>
+    </a>
+  </div>
+</div>
+<div class="container">
+  <div class="row my-2">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-sm btn-primary my-2" (click)="toggleFilter()">
+        <span><i class="fa fa-search"></i></span>
+        Filter
+      </button>
+    </div>
+  </div>
+  <div class="row my-2" *ngIf="this.filter">
+    <div class="col-md-3">
+      <div>
+        <button class="btn btn-sm btn-primary my-2">
+          <span><i class="fa fa-check"></i></span>
+          Repondu
+        </button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <button class="btn btn-sm btn-primary my-2">
+          <span><i class="fa fa-sync"></i></span>
+          Non Repondu
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Action</th>
+              <th scope="col">Réponse</th>
+              <th scope="col">Numero d'ordre</th>
+              <th scope="col">Objet</th>
+              <th scope="col">Expediteur</th>
+              <th scope="col">Date</th>
+              <th scope="col">Type Plainte</th>
+              <th scope="col">Status</th>
+              <th scope="col">Dossier</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of resultCritere; index as i">
+              <td>
+                <span>
+                  <i
+                    class="btn btn-warning fa fa-edit mr-2"
+                    (click)="openModalWithClassModify(templateModifyPlainte, i)"
+                  >
+                  </i>
+                </span>
+                <i
+                  class="btn btn-primary fa fa-eye mx-2"
+                  data-toggle="modal"
+                  data-target="#fichierPlainte"
+                  (click)="openModalWithClass(template, i)"
+                >
+                </i>
+                <span>
+                  <i
+                    class="btn btn-danger fa fa-trash mr-2"
+                    (click)="delete(r, i)"
+                  >
+                  </i>
+                </span>
+              </td>
+              <td>
+                <span *ngIf="plaintes[i].reponse">
+                  <i
+                    class="btn btn-success mr-2 btn-sm"
+                    (click)="openModalResponse(templateReponse, i)"
+                  >
+                    Ajouter Réponse
+                  </i>
+                </span>
+                <button
+                  class="btn btn-sm btn-success"
+                  *ngIf="!plaintes[i].reponse"
+                >
+                  <span><i class="fa fa-check"></i></span>
+                </button>
+              </td>
+              <td>{{ r.numeroDOrdre }}</td>
+              <td>{{ r.objet }}</td>
+              <td>{{ r.expediteur }}</td>
+              <td>{{ r.datePlainte }}</td>
+              <td>{{ r.type }}</td>
+              <td>{{ r.status.statusName }}</td>
+              <td>{{ r.dossier.nom }}</td>
+              <td>{{ r.createdAt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Plainte détails:</h4>
+      <button
+        type="button"
+        id="btnClose"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" id="pdfDiv">
+      <div class="row">
+        <div class="col-md-4">Numero D'Ordre : {{ plainte.numeroDOrdre }}</div>
+        <div class="col-md-4">Date : {{ plainte.createdAt }}</div>
+        <div class="col-md-4">Objet : {{ plainte.objet }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Numero D'Envoi : {{ plainte.numeroEnvoi }}</div>
+        <div class="col-md-4">Observation : {{ plainte.observation }}</div>
+        <div class="col-md-4">Source : {{ plainte.source }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Type : {{ plainte.type }}</div>
+        <div class="col-md-4">Visa : {{ plainte.visa }}</div>
+        <div class="col-md-4">Expediteur : {{ plainte.expediteur }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Plainte Depart : {{ plainte.plainteDepart }}</div>
+        <div class="col-md-4">
+          Division : {{ plainte.division.nomDivision }}
+        </div>
+        <div class="col-md-4">Instruction : {{ plainte.instruction.nom }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Theme : {{ plainte.theme.ref }}</div>
+        <div class="col-md-4">Dossier : {{ plainte.dossier.nom }}</div>
+        <div class="col-md-4">Status : {{ plainte.status.statusName }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Class : {{ plainte.pClasse.nom }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <button
+          class="fa btn fa-file-pdf-o btn-lg"
+          id="btnpdf"
+          printSectionId="pdfDiv"
+          [useExistingCss]="true"
+          [printTitle]="title"
+          styleSheetFile="assets/pdf.css"
+          ngxPrint
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #templateModifyPlainte>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card">
+        <div class="card-header">
+          <h3>Modifier Plainte:</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                ><label>Numero DOrdre:</label
+                ><input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="plainte.numeroDOrdre"
+                  disabled
+              /></span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Dossier:</label
+                ><input
+                  list="dossier"
+                  name="dossier"
+                  class="form-control"
+                  [(ngModel)]="plainte.dossier.nom"
+                  required
+                  #dossier="ngModel"
+                />
+                <datalist id="dossier">
+                  <option selected value>{{ plainte.dossier.nom }}</option>
+                  <option>{{ plainte.dossier.nom }}</option>
+                </datalist>
+                <div
+                  class="text-danger"
+                  *ngIf="dossier.touched && !dossier.valid"
+                >
+                  <div *ngIf="dossier.errors?.required">
+                    **choisir une dossier
+                  </div>
+                </div></span
+              >
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Objet :</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.objet"
+              /></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                ><label>Numero D'Envoi:</label
+                ><input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="plainte.numeroEnvoi"
+              /></span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Observation:</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.observation"
+              /></span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Date Plainte:</label
+                ><input
+                  type="date"
+                  class="form-control"
+                  [(ngModel)]="plainte.datePlainte"
+              /></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                ><label>Source:</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.source"
+              /></span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Type :</label
+                ><select name="type" class="form-control">
+                  <option selected>{{ plainte.type }}</option>
+                  <option value="proposition">Proposition</option>
+                  <option value="plainte">Plainte</option>
+                  <option value="remarque">Remarque</option>
+                </select>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Visa :</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.visa"
+              /></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                ><label>Expediteur :</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.expediteur"
+              /></span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Plainte Depart</label>
+                <select
+                  name="plainteDep"
+                  class="form-select select form-control"
+                  id="plainteDep"
+                  [(ngModel)]="plainte.plainteDepart.ref"
+                  required
+                  #plainteDep="ngModel"
+                >
+                  <option selected>{{ plainte.plainteDepart.ref }}</option>
+                  <option *ngFor="let p of plaintesDepart">{{ p.ref }}</option>
+                </select>
+                <div
+                  class="text-danger"
+                  *ngIf="plainteDep.touched && !plainteDep.valid"
+                >
+                  <div *ngIf="plainteDep.errors?.required">
+                    **veuillez choisir Plainte Depart
+                  </div>
+                </div>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Division :</label>
+                <select
+                  name="division"
+                  class="form-select select form-control"
+                  id="dividion"
+                  [(ngModel)]="plainte.division.ref"
+                  required
+                  #division="ngModel"
+                >
+                  <option selected>{{ plainte.division.ref }}</option>
+                  <option *ngFor="let d of divisions">
+                    {{ d.nomDivision }}
+                  </option>
+                </select></span
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                ><label>Instruction :</label>
+                <select
+                  name="instruction"
+                  class="form-select select form-control"
+                  id="instruction"
+                  [(ngModel)]="plainte.instruction.ref"
+                  required
+                  #instruction="ngModel"
+                >
+                  <option selected>{{ plainte.instruction.ref }}</option>
+                  <option *ngFor="let i of instructions">{{ i.nom }}</option>
+                </select></span
+              >
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Theme :</label>
+                <select
+                  name="theme"
+                  class="form-select select form-control"
+                  id="theme"
+                  [(ngModel)]="plainte.theme.ref"
+                  required
+                  #theme="ngModel"
+                >
+                  <option selected>{{ plainte.theme.ref }}</option>
+                  <option *ngFor="let t of themes">{{ t.ref }}</option>
+                </select>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Dossier :</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.dossier.nom"
+              /></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                ><label>Status</label>
+                <select
+                  name="status"
+                  class="form-select select form-control"
+                  id="statu"
+                  [(ngModel)]="plainte.status.statusName"
+                  required
+                  #status="ngModel"
+                >
+                  <option selected>{{ plainte.status.statusName }}</option>
+                  <option *ngFor="let s of statusT">{{ s.statusFr }}</option>
+                </select>
+                <div
+                  class="text-danger"
+                  *ngIf="status.touched && !status.valid"
+                >
+                  <div *ngIf="status.errors?.required">
+                    **veuillez choisir le status du plainte
+                  </div>
+                </div>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Classe :</label>
+                <select
+                  name="classe"
+                  class="form-select select form-control"
+                  id="classe"
+                  [(ngModel)]="plainte.pClasse.ref"
+                  required
+                  #class="ngModel"
+                >
+                  <option selected>{{ plainte.pClasse.ref }}</option>
+                  <option *ngFor="let c of clases">{{ c.ref }}</option>
+                </select>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span
+                ><label>Publie :</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="plainte.publie"
+              /></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <button
+                class="btn fa btn-primary fa fa-edit mt-2 bg-gradient"
+                (click)="modifySave(plainte)"
+              >
+                Enregistrer les modifications !
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #templateReponse>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">
+        Modifier Plainte {{ plainte.numeroDOrdre }}
+      </h4>
+      <button
+        type="button"
+        id="btn-ajouter"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRefRes.hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="countainer">
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="dossieri" class="form-label">Dossier</label>
+                  <input
+                    type="text"
+                    id="dossieri"
+                    name="dossier"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.dossier.nom }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="numero-ordre" class="form-label"
+                    >Numero d'ordre</label
+                  >
+                  <input
+                    type="text"
+                    id="numero-ordre"
+                    name="numero-ordre"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.numeroDOrdre }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="date-plainte" class="form-label"
+                    >Date Plainte</label
+                  >
+                  <input
+                    type="date"
+                    id="date-plainte"
+                    name="date-plainte"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.datePlainte }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="objet-plainte" class="form-label"
+                    >Objet Plainte</label
+                  >
+                  <input
+                    type="text"
+                    id="objet-plainte"
+                    name="objet-plainte"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.objet }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="publie" class="form-label">Publie</label>
+                  <input
+                    type="date"
+                    id="publie"
+                    class="form-control"
+                    name="publie"
+                    readonly
+                    value="{{ plainte.publie }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="dividion" class="form-label">Division</label>
+                  <input
+                    type="text"
+                    name="division"
+                    class="form-control"
+                    id="dividion"
+                    readonly
+                    value="{{ plainte.division.ref }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="dateEnvoi" class="form-label">Date Envoi</label>
+                  <input
+                    type="date"
+                    id="dateEnvoi"
+                    name="dateEnvoi"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.dateEnvoi }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="expediteur" class="form-label">Expediteur</label>
+                  <input
+                    type="text"
+                    id="expediteur"
+                    name="expediteur"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.expediteur }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="numeroEnvoi" class="form-label"
+                    >Numero d'envoi</label
+                  >
+                  <input
+                    type="text"
+                    id="numeroEnvoi"
+                    name="numeroEnvoi"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.numeroEnvoi }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="observation" class="form-label"
+                    >Observation</label
+                  >
+                  <input
+                    type="text"
+                    id="observation"
+                    name="observation"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.observation }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="status" class="form-label">Status</label>
+                  <input
+                    type="text"
+                    name="status"
+                    class="form-control"
+                    id="status"
+                    readonly
+                    value="{{ plainte.status.statusName }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="classe" class="form-label">Classe</label>
+                  <input
+                    type="text"
+                    name="classe"
+                    class="form-control"
+                    id="classe"
+                    readonly
+                    value="{{ plainte.pClasse.ref }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="tPlainte" class="form-label"
+                    >Plainte Depart</label
+                  >
+                  <input
+                    type="text"
+                    name="plainte-depart"
+                    class="form-control"
+                    id="tPlainte"
+                    readonly
+                    value="{{ plainte.plainteDepart.ref }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="sourcei" class="form-label">Source</label>
+                  <input
+                    type="text"
+                    id="sourcei"
+                    name="source"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.source }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="type" class="form-label">Theme</label>
+                  <input
+                    type="text"
+                    name="type"
+                    class="form-control"
+                    id="type"
+                    readonly
+                    value="{{ plainte.theme.ref }}"
+                  />
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="visa" class="form-label">Visa</label>
+                  <input
+                    type="text"
+                    name="visa"
+                    class="form-control"
+                    id="visa"
+                    readonly
+                    value="{{ plainte.visa }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="instruction" class="form-label"
+                    >Instruction</label
+                  >
+                  <input
+                    type="text"
+                    name="instruction"
+                    class="form-control"
+                    id="instruction"
+                    readonly
+                    value="{{ plainte.instruction.ref }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="autreIntruction" class="form-label">
+                    Autre Instruction
+                  </label>
+                  <input
+                    type="text"
+                    id="autreIntruction"
+                    name="autreIntruction"
+                    class="form-control"
+                    readonly
+                    value="{{ plainte.ref }}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="categorie" class="form-label">Catégorie</label>
+                  <input
+                    type="text"
+                    name="categorie"
+                    class="form-control"
+                    id="categorie"
+                    readonly
+                    value="{{ plainte.type }}"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Réponse:</label>
+                  <textarea
+                    class="form-control"
+                    name="reponse"
+                    placeholder="ajouter la reponse ici"
+                    [(ngModel)]="plainte.reponse"
+                  ></textarea>
+                </div>
+              </div>
+              <button
+                class="btn btn-warning mt-2"
+                (click)="modifySave(plainte)"
+              >
+                Update Plainte
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
