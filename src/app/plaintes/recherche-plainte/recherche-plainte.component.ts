@@ -2,7 +2,7 @@ import { Vo } from '../../controller/models/vo.model';
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
-import { BsModalService} from "ngx-bootstrap/modal";
+import { BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {Dossier} from "../../controller/models/dossier.model";
 import {PlainteDepart} from "../../controller/models/plainte-depart.model";
 import {Division} from "../../controller/models/division.model";
@@ -30,6 +30,7 @@ export class RecherchePlainteComponent implements OnInit {
   public findOrNot = true;
   public plainte = new Plainte();
   modalRef!: any;
+  modalRefRes!: BsModalRef;
   public title = 'Fiche du Plainte :';
   public plainteToModify!: Plainte;
   public modifyOn = false;
@@ -40,7 +41,6 @@ export class RecherchePlainteComponent implements OnInit {
   public instructions!: Array<Instruction>;
   public themes!: Array<Theme>;
   public clases!: Array<RClass>;
-
 
   constructor(
     private plainteservice: PlaintesService,
@@ -53,8 +53,6 @@ export class RecherchePlainteComponent implements OnInit {
     private rclassService: RclassService
   ) {
 
-
-
   }
 
   ngOnInit(): void {
@@ -65,6 +63,18 @@ export class RecherchePlainteComponent implements OnInit {
     this.findAllInstructions();
     this.findAllThemes();
     this.findAllRClass();
+  }
+
+  findBynumeroDordre(index: number){
+    let numeroDOrdre = this.resultCritere[index].numeroDOrdre;
+    this.plainteservice.findBynumeroDordre(numeroDOrdre).subscribe(
+      data => {
+        console.log(data);
+        this.plainte = data;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
   rechercheCritere() {
@@ -85,23 +95,25 @@ export class RecherchePlainteComponent implements OnInit {
     );
   }
 
-
-
   openModalWithClass(template: TemplateRef<any>, index: number) {
     this.modalRef = this.modalService.show(
       template,
       Object.assign({}, {class: 'gray modal-lg'})
     );
-    let numeroDOrdre = this.resultCritere[index].numeroDOrdre;
-    this.plainteservice.findBynumeroDordre(numeroDOrdre).subscribe(
-      data => {
-        console.log(data);
-        this.plainte = data;
-      }, error => {
-        console.log(error);
-      }
-    );
+    let i = index;
+    this.findBynumeroDordre(i);
   }
+
+  /*******/
+  openModalResponse(template: TemplateRef<any>, index: number) {
+    this.modalRefRes = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+    let i = index;
+    this.findBynumeroDordre(i);
+  }
+
   delete(r: Plainte, i: number) {
     this.plainteservice.delete(r.numeroDOrdre).subscribe(
       data => {
@@ -128,7 +140,6 @@ export class RecherchePlainteComponent implements OnInit {
       }
     )
   }
-
 
   modifySave(plainteToModify: Plainte) {
     this.plainteservice.modifyPlainte(plainteToModify).subscribe(

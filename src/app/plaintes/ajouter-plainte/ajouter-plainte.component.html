@@ -1,84 +1,89 @@
 <div class="countainer">
-  <div class="card card-1">
-    <label>Dossier</label>
-    <input
-      list="dossier"
-      name="dossier"
-      class="form-control"
-      [(ngModel)]="plainte.dossier.nom"
-      required
-      #dossier="ngModel"
-    />
-    <datalist id="dossier">
-      <option *ngFor="let d of dossiers">{{ d.nom }}</option>
-    </datalist>
-    <div class="text-danger" *ngIf="dossier.touched && !dossier.valid">
-      <div *ngIf="dossier.errors?.required">**choisir une dossier</div>
-    </div>
-  </div>
-  <div class="card card-2">
-    <div class="card-header">Information Plainte</div>
-    <div class="card-body form-group">
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Numero d'ordre</label
-            ><input
-              type="text"
-              name="numero-ordre"
-              placeholder="numero d'ordre"
-              class="input-group form-control"
-              [(ngModel)]="plainte.numeroDOrdre"
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="dossieri" class="form-label">Dossier</label>
+            <input
+              list="dossier"
+              id="dossieri"
+              name="dossier"
+              class="form-control"
+              [(ngModel)]="plainte.dossier.nom"
               required
-              #numOrdre="ngModel"
-          /></span>
-          <div class="text-danger" *ngIf="numOrdre.touched && !numOrdre.valid">
-            <div *ngIf="numOrdre.errors?.required">
-              **veuillez saisir un numero d'ordre
+              #dossier="ngModel"
+            />
+            <datalist id="dossier">
+              <option *ngFor="let d of dossiers">{{ d.nom }}</option>
+            </datalist>
+            <div class="text-danger" *ngIf="dossier.touched && !dossier.valid">
+              <div *ngIf="dossier.errors?.required">**choisir une dossier</div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <span
-            ><label>Date Plainte</label
-            ><input
+        <div class="row">
+          <div class="col-md-4">
+            <label for="numero-ordre" class="form-label">Numero d'ordre</label>
+            <input
+              type="text"
+              id="numero-ordre"
+              name="numero-ordre"
+              placeholder="numero d'ordre"
+              class="form-control"
+              [(ngModel)]="plainte.numeroDOrdre"
+              required
+              #numOrdre="ngModel"
+            />
+            <div
+              class="text-danger"
+              *ngIf="numOrdre.touched && !numOrdre.valid"
+            >
+              <div *ngIf="numOrdre.errors?.required">
+                **veuillez saisir un numero d'ordre
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="date-plainte" class="form-label">Date Plainte</label>
+            <input
               type="date"
+              id="date-plainte"
               name="date-plainte"
               placeholder="date plainte"
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.datePlainte"
-          /></span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Objet Plainte</label
-            ><input
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="objet-plainte" class="form-label">Objet Plainte</label>
+            <input
               type="text"
+              id="objet-plainte"
               name="objet-plainte"
               placeholder="objet plainte"
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.objet"
-          /></span>
+            />
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Publie</label
-            ><input
+        <div class="row">
+          <div class="col-md-4">
+            <label for="publie" class="form-label">Publie</label>
+            <input
               type="date"
+              id="publie"
               placeholder="publie"
-              class="input-group form-control"
+              class="form-control"
               name="publie"
               [(ngModel)]="plainte.publie"
-          /></span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Division</label>
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="dividion" class="form-label">Division</label>
             <select
               name="division"
-              class="form-select select form-control"
+              class="form-select"
               id="dividion"
               [(ngModel)]="plainte.division.ref"
               required
@@ -94,59 +99,61 @@
                 **veuillez choisir la division concernet
               </div>
             </div>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Date Envoi</label
-            ><input
+          </div>
+          <div class="col-md-4">
+            <label for="dateEnvoi" class="form-label">Date Envoi</label>
+            <input
               type="date"
+              id="dateEnvoi"
+              name="dateEnvoi"
               placeholder=""
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.dateEnvoi"
-          /></span>
+            />
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Expediteur</label
-            ><input
+        <div class="row">
+          <div class="col-md-4">
+            <label for="expediteur" class="form-label">Expediteur</label>
+            <input
               type="text"
+              id="expediteur"
+              name="expediteur"
               placeholder="expediteur"
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.expediteur"
-          /></span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Numero d'envoi</label
-            ><input
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="numeroEnvoi" class="form-label">Numero d'envoi</label>
+            <input
               type="text"
+              id="numeroEnvoi"
+              name="numeroEnvoi"
               placeholder="numero d'envoi"
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.numeroEnvoi"
-          /></span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Observation</label
-            ><input
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="observation" class="form-label">Observation</label>
+            <input
               type="text"
+              id="observation"
+              name="observation"
               placeholder="observation"
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.observation"
-          /></span>
+            />
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Status</label>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="status" class="form-label">Status</label>
             <select
               name="status"
-              class="form-select select form-control"
-              id="statu"
+              class="form-select"
+              id="status"
               [(ngModel)]="plainte.status.statusName"
               required
               #status="ngModel"
@@ -158,14 +165,12 @@
                 **veuillez choisir le status du plainte
               </div>
             </div>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Classe</label>
+          </div>
+          <div class="col-md-4">
+            <label for="classe" class="form-label">Classe</label>
             <select
               name="classe"
-              class="form-select select form-control"
+              class="form-select"
               id="classe"
               [(ngModel)]="plainte.pClasse.ref"
               required
@@ -178,14 +183,12 @@
                 **veuillez choisir une classe
               </div>
             </div>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Plainte Depart</label>
+          </div>
+          <div class="col-md-4">
+            <label for="tPlainte" class="form-label">Plainte Depart</label>
             <select
               name="plainte-depart"
-              class="form-select select form-control"
+              class="form-select"
               id="tPlainte"
               [(ngModel)]="plainte.plainteDepart.ref"
               required
@@ -201,15 +204,14 @@
                 **veuillez choisir Plainte Depart
               </div>
             </div>
-          </span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Source</label>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="sourcei" class="form-label">Source</label>
             <input
               list="source"
+              id="sourcei"
               name="source"
               class="form-control"
               [(ngModel)]="plainte.source"
@@ -224,14 +226,12 @@
                 **veuillez saisir Source
               </div>
             </div>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Theme</label>
+          </div>
+          <div class="col-md-4">
+            <label for="type" class="form-label">Theme</label>
             <select
               name="type"
-              class="form-select select form-control"
+              class="form-select"
               id="type"
               [(ngModel)]="plainte.theme.ref"
               required
@@ -240,19 +240,17 @@
               <option *ngFor="let t of themes">{{ t.ref }}</option>
             </select>
             <div class="text-danger" *ngIf="theme.touched && !theme.valid">
-              <div *ngIf="theme.errors?.required">**veuillez saisir Source</div>
+              <div *ngIf="theme.errors?.required">**veuillez saisir Theme</div>
             </div>
-          </span>
+          </div>
+          <div class="col-md-4"></div>
         </div>
-        <div class="col-md-4"></div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Visa</label>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="visa" class="form-label">Visa</label>
             <select
               name="visa"
-              class="form-select select form-control"
+              class="form-select"
               id="visa"
               [(ngModel)]="plainte.visa"
             >
@@ -260,14 +258,12 @@
               <option>v2</option>
               <option>v3</option>
             </select>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Instruction</label>
+          </div>
+          <div class="col-md-4">
+            <label for="instruction" class="form-label">Instruction</label>
             <select
               name="instruction"
-              class="form-select select form-control"
+              class="form-select"
               id="instruction"
               [(ngModel)]="plainte.instruction.ref"
               required
@@ -280,50 +276,49 @@
               *ngIf="instruction.touched && !instruction.valid"
             >
               <div *ngIf="instruction.errors?.required">
-                **veuillez saisir Source
+                **veuillez saisir Instruction
               </div>
             </div>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <span
-            ><label>Autre Instruction</label>
+          </div>
+          <div class="col-md-4">
+            <label for="autreIntruction" class="form-label">
+              Autre Instruction
+            </label>
             <input
               type="text"
+              id="autreIntruction"
+              name="autreIntruction"
               placeholder="autre intruction"
-              class="input-group form-control"
+              class="form-control"
               [(ngModel)]="plainte.ref"
             />
-          </span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-          ><label>Type</label>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="categorie" class="form-label">Type</label>
             <select
               name="categorie"
-              class="form-select select form-control"
+              class="form-select"
               id="categorie"
               [(ngModel)]="plainte.type"
             >
-                <option value="plainte">Plainte</option>
+              <option value="plainte">Plainte</option>
               <option value="proposition">Proposition</option>
               <option value="remarque">Remarque</option>
             </select>
-          </span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Fichier</label><br /><input type="file" name="fichier"
-          /></span>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="fichier" class="form-label">Fichier</label><br />
+            <input type="file" id="fichier" name="fichier" />
+          </div>
         </div>
-      </div>
-      <button class="btn btn-primary mt-2" (click)="ajouterPlainte()">
-        Ajouter Plainte
-      </button>
+        <button class="btn btn-primary mt-2" (click)="ajouterPlainte()">
+          Ajouter Plainte
+        </button>
+      </form>
     </div>
   </div>
 </div>

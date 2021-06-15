@@ -20,6 +20,7 @@ export class Plainte {
   public type!: string;
   public visa!: boolean;
   public expediteur!: string;
+  public reponse!: string;
   public plainteDepart = new PlainteDepart();
   public division = new Division();
   public instruction = new Instruction();
@@ -27,7 +28,4 @@ export class Plainte {
   public dossier = new Dossier();
   public status = new Status();
   public pClasse = new RClass();
-
-  constructor() {
-  }
 }
