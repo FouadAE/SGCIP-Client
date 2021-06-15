@@ -5,25 +5,25 @@
       <div class="row">
         <div class="col-md-6">
           <span
-            ><label for="numOrdre">Numero D'ordre:</label
-            ><input
-              type="text"
-              id="numOrdre"
-              class="form-control"
-              [(ngModel)]="vo.numeroDOrdre"
+          ><label for="numOrdre">Numero D'ordre:</label
+          ><input
+            type="text"
+            id="numOrdre"
+            class="form-control"
+            [(ngModel)]="vo.numeroDOrdre"
           /></span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <span
-            ><label for="status">Status:</label
-            ><select
-              name="status"
-              id="status"
-              class="form-control form-select select"
-              [(ngModel)]="vo.status"
-            >
+          ><label for="status">Status:</label
+          ><select
+            name="status"
+            id="status"
+            class="form-control form-select select"
+            [(ngModel)]="vo.status"
+          >
               <option value="pasencore">Pas Encore</option>
               <option value="traitee">Traitee</option>
               <option value="encours">encours</option>
@@ -32,13 +32,13 @@
         </div>
         <div class="col-md-4">
           <span
-            ><label for="type">Type:</label
-            ><select
-              name="type"
-              id="type"
-              class="form-control select form-select"
-              [(ngModel)]="vo.type"
-            >
+          ><label for="type">Type:</label
+          ><select
+            name="type"
+            id="type"
+            class="form-control select form-select"
+            [(ngModel)]="vo.type"
+          >
               <option value="palinte">Plainte</option>
               <option value="proposition">Proposition</option>
               <option value="remarque">Remarque</option>
@@ -49,22 +49,22 @@
       <div class="row">
         <div class="col-md-6">
           <span
-            ><label for="datedepart">A partir de:</label
-            ><input
-              type="date"
-              id="datedepart"
-              class="form-control"
-              [(ngModel)]="vo.startDate"
+          ><label for="datedepart">A partir de:</label
+          ><input
+            type="date"
+            id="datedepart"
+            class="form-control"
+            [(ngModel)]="vo.startDate"
           /></span>
         </div>
         <div class="col-md-6">
           <span
-            ><label for="datefin">Jusqu'a:</label
-            ><input
-              type="date"
-              id="datefin"
-              class="form-control"
-              [(ngModel)]="vo.endDate"
+          ><label for="datefin">Jusqu'a:</label
+          ><input
+            type="date"
+            id="datefin"
+            class="form-control"
+            [(ngModel)]="vo.endDate"
           /></span>
         </div>
       </div>
@@ -101,61 +101,61 @@
       <div class="container" id="htmlData" #content>
         <table class="table table-responsive">
           <thead>
-            <tr>
-              <th scope="col">Action</th>
-              <th scope="col">Réponse</th>
-              <th scope="col">Numero d'ordre</th>
-              <th scope="col">Objet</th>
-              <th scope="col">Expediteur</th>
-              <th scope="col">Date</th>
-              <th scope="col">Type Plainte</th>
-              <th scope="col">Status</th>
-              <th scope="col">Dossier</th>
-              <th scope="col">Date</th>
-            </tr>
+          <tr>
+            <th scope="col">Action</th>
+            <th scope="col">Réponse</th>
+            <th scope="col">Numero d'ordre</th>
+            <th scope="col">Objet</th>
+            <th scope="col">Expediteur</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type Plainte</th>
+            <th scope="col">Status</th>
+            <th scope="col">Dossier</th>
+            <th scope="col">Date</th>
+          </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let r of resultCritere; index as i">
-              <td>
+          <tr *ngFor="let r of resultCritere; index as i">
+            <td>
                 <span>
                   <i
                     class="btn btn-warning fa fa-edit mr-2"
-                    (click)="modify(r)"
+                    (click)="openModalWithClassModify(templateModifyPlainte,i)"
                   ></i>
                 </span>
-                <i
-                  class="btn btn-danger fa fa-eye mr-2"
-                  data-toggle="modal"
-                  data-target="#fichierPlainte"
-                  (click)="openModalWithClass(template, i)"
-                >
-                </i>
-                <span>
+              <i
+                class="btn btn-primary fa fa-eye mx-2"
+                data-toggle="modal"
+                data-target="#fichierPlainte"
+                (click)="openModalWithClass(template, i)"
+              >
+              </i>
+              <span>
                   <i
                     class="btn btn-danger fa fa-trash mr-2"
                     (click)="delete(r, i)"
                   ></i>
                 </span>
-              </td>
-              <td>
+            </td>
+            <td>
                 <span>
                   <i
-                    class="btn btn-success mr-2"
+                    class="btn btn-success mr-2 btn-sm"
                     (click)="openModalResponse(templateReponse, i)"
                   >
                     Ajouter Réponse
                   </i>
                 </span>
-              </td>
-              <td>{{ r.numeroDOrdre }}</td>
-              <td>{{ r.objet }}</td>
-              <td>{{ r.expediteur }}</td>
-              <td>{{ r.datePlainte }}</td>
-              <td>{{ r.type }}</td>
-              <td>{{ r.status.statusName }}</td>
-              <td>{{ r.dossier.nom }}</td>
-              <td>{{ r.createdAt }}</td>
-            </tr>
+            </td>
+            <td>{{ r.numeroDOrdre }}</td>
+            <td>{{ r.objet }}</td>
+            <td>{{ r.expediteur }}</td>
+            <td>{{ r.datePlainte }}</td>
+            <td>{{ r.type }}</td>
+            <td>{{ r.status.statusName }}</td>
+            <td>{{ r.dossier.nom }}</td>
+            <td>{{ r.createdAt }}</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -227,134 +227,143 @@
     </div>
   </ng-template>
 
-  <div class="card" *ngIf="modifyOn">
-    <div class="card-header">
-      <h3>Modifier Plainte:</h3>
+
+  <ng-template #templateModifyPlainte>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-4">
-          <span
-            ><label>Numero DOrdre:</label
-            ><input
-              type="number"
-              class="form-control"
-              [(ngModel)]="plainteToModify.numeroDOrdre"
-              disabled
-          /></span>
+    <div class="modal-body">
+      <div class="card">
+        <div class="card-header">
+          <h3>Modifier Plainte:</h3>
         </div>
-        <div class="col-md-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
           <span
-            ><label>Dossier:</label
-            ><input
-              list="dossier"
-              name="dossier"
-              class="form-control"
-              [(ngModel)]="plainteToModify.dossier.nom"
-              required
-              #dossier="ngModel"
-            />
+          ><label>Numero DOrdre:</label
+          ><input
+            type="number"
+            class="form-control"
+            [(ngModel)]="plainte.numeroDOrdre"
+            disabled
+          /></span>
+            </div>
+            <div class="col-md-4">
+          <span
+          ><label>Dossier:</label
+          ><input
+            list="dossier"
+            name="dossier"
+            class="form-control"
+            [(ngModel)]="plainte.dossier.nom"
+            required
+            #dossier="ngModel"
+          />
             <datalist id="dossier">
-              <option selected value>{{ plainteToModify.dossier.nom }}</option>
-              <option>{{ plainteToModify.dossier.nom }}</option>
+              <option selected value>{{ plainte.dossier.nom }}</option>
+              <option>{{ plainte.dossier.nom }}</option>
             </datalist>
             <div class="text-danger" *ngIf="dossier.touched && !dossier.valid">
               <div *ngIf="dossier.errors?.required">**choisir une dossier</div>
             </div></span
           >
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Objet :</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.objet"
+          ><label>Objet :</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.objet"
           /></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
           <span
-            ><label>Numero D'Envoi:</label
-            ><input
-              type="number"
-              class="form-control"
-              [(ngModel)]="plainteToModify.numeroEnvoi"
+          ><label>Numero D'Envoi:</label
+          ><input
+            type="number"
+            class="form-control"
+            [(ngModel)]="plainte.numeroEnvoi"
           /></span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Observation:</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.observation"
+          ><label>Observation:</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.observation"
           /></span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Date Plainte:</label
-            ><input
-              type="date"
-              class="form-control"
-              [(ngModel)]="plainteToModify.datePlainte"
+          ><label>Date Plainte:</label
+          ><input
+            type="date"
+            class="form-control"
+            [(ngModel)]="plainte.datePlainte"
           /></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
           <span
-            ><label>Source:</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.source"
+          ><label>Source:</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.source"
           /></span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Type :</label
-            ><select name="type" class="form-control">
-              <option selected>{{ plainteToModify.type }}</option>
+          ><label>Type :</label
+          ><select name="type" class="form-control">
+              <option selected>{{ plainte.type }}</option>
               <option value="proposition">Proposition</option>
               <option value="plainte">Plainte</option>
               <option value="remarque">Remarque</option>
             </select>
           </span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Visa :</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.visa"
+          ><label>Visa :</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.visa"
           /></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
           <span
-            ><label>Expediteur :</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.expediteur"
+          ><label>Expediteur :</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.expediteur"
           /></span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Plainte Depart</label>
+          ><label>Plainte Depart</label>
             <select
               name="plainteDep"
               class="form-select select form-control"
               id="plainteDep"
-              [(ngModel)]="plainteToModify.plainteDepart.ref"
+              [(ngModel)]="plainte.plainteDepart.ref"
               required
               #plainteDep="ngModel"
             >
-              <option selected>{{ plainteToModify.plainteDepart.ref }}</option>
+              <option selected>{{ plainte.plainteDepart.ref }}</option>
               <option *ngFor="let p of plaintesDepart">{{ p.ref }}</option>
             </select>
             <div
@@ -366,80 +375,80 @@
               </div>
             </div>
           </span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Division :</label>
+          ><label>Division :</label>
             <select
               name="division"
               class="form-select select form-control"
               id="dividion"
-              [(ngModel)]="plainteToModify.division.ref"
+              [(ngModel)]="plainte.division.ref"
               required
               #division="ngModel"
             >
-              <option selected>{{ plainteToModify.division.ref }}</option>
+              <option selected>{{ plainte.division.ref }}</option>
               <option *ngFor="let d of divisions">{{ d.nomDivision }}</option>
             </select></span
           >
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
           <span
-            ><label>Instruction :</label>
+          ><label>Instruction :</label>
             <select
               name="instruction"
               class="form-select select form-control"
               id="instruction"
-              [(ngModel)]="plainteToModify.instruction.ref"
+              [(ngModel)]="plainte.instruction.ref"
               required
               #instruction="ngModel"
             >
-              <option selected>{{ plainteToModify.instruction.ref }}</option>
+              <option selected>{{ plainte.instruction.ref }}</option>
               <option *ngFor="let i of instructions">{{ i.nom }}</option>
             </select></span
           >
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Theme :</label>
+          ><label>Theme :</label>
             <select
               name="theme"
               class="form-select select form-control"
               id="theme"
-              [(ngModel)]="plainteToModify.theme.ref"
+              [(ngModel)]="plainte.theme.ref"
               required
               #theme="ngModel"
             >
-              <option selected>{{ plainteToModify.theme.ref }}</option>
+              <option selected>{{ plainte.theme.ref }}</option>
               <option *ngFor="let t of themes">{{ t.ref }}</option>
             </select>
           </span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Dossier :</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.dossier.nom"
+          ><label>Dossier :</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.dossier.nom"
           /></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
           <span
-            ><label>Status</label>
+          ><label>Status</label>
             <select
               name="status"
               class="form-select select form-control"
               id="statu"
-              [(ngModel)]="plainteToModify.status.statusName"
+              [(ngModel)]="plainte.status.statusName"
               required
               #status="ngModel"
             >
-              <option selected>{{ plainteToModify.status.statusName }}</option>
+              <option selected>{{ plainte.status.statusName }}</option>
               <option *ngFor="let s of statusT">{{ s.statusFr }}</option>
             </select>
             <div class="text-danger" *ngIf="status.touched && !status.valid">
@@ -448,47 +457,49 @@
               </div>
             </div>
           </span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Classe :</label>
+          ><label>Classe :</label>
             <select
               name="classe"
               class="form-select select form-control"
               id="classe"
-              [(ngModel)]="plainteToModify.pClasse.ref"
+              [(ngModel)]="plainte.pClasse.ref"
               required
               #class="ngModel"
             >
-              <option selected>{{ plainteToModify.pClasse.ref }}</option>
+              <option selected>{{ plainte.pClasse.ref }}</option>
               <option *ngFor="let c of clases">{{ c.ref }}</option>
             </select>
           </span>
-        </div>
-        <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
           <span
-            ><label>Publie :</label
-            ><input
-              type="text"
-              class="form-control"
-              [(ngModel)]="plainteToModify.publie"
+          ><label>Publie :</label
+          ><input
+            type="text"
+            class="form-control"
+            [(ngModel)]="plainte.publie"
           /></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <button
+                class="btn fa btn-primary fa fa-edit mt-2 bg-gradient"
+                (click)="modifySave(plainte)"
+              >
+                Enregistrer les modifications !
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          <button
-            class="btn fa btn-primary fa fa-edit mt-2 bg-gradient"
-            (click)="modifySave(plainteToModify)"
-          >
-            Enregistrer les modifications !
-          </button>
-        </div>
-      </div>
+
     </div>
-  </div>
+  </ng-template>
 
   <ng-template #templateReponse>
     <div class="modal-header">
@@ -497,6 +508,7 @@
       </h4>
       <button
         type="button"
+        id="btn-ajouter"
         class="close pull-right"
         aria-label="Close"
         (click)="modalRefRes.hide()"
@@ -518,14 +530,14 @@
                     name="dossier"
                     class="form-control"
                     readonly
-                    value="plainte.dossier.nom"
+                    value="{{plainte.dossier.nom}}"
                   />
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
                   <label for="numero-ordre" class="form-label"
-                    >Numero d'ordre</label
+                  >Numero d'ordre</label
                   >
                   <input
                     type="text"
@@ -533,12 +545,12 @@
                     name="numero-ordre"
                     class="form-control"
                     readonly
-                    value="plainte.numeroDOrdre"
+                    value="{{plainte.numeroDOrdre}}"
                   />
                 </div>
                 <div class="col-md-4">
                   <label for="date-plainte" class="form-label"
-                    >Date Plainte</label
+                  >Date Plainte</label
                   >
                   <input
                     type="date"
@@ -546,12 +558,12 @@
                     name="date-plainte"
                     class="form-control"
                     readonly
-                    value="plainte.datePlainte"
+                    value="{{plainte.datePlainte}}"
                   />
                 </div>
                 <div class="col-md-4">
                   <label for="objet-plainte" class="form-label"
-                    >Objet Plainte</label
+                  >Objet Plainte</label
                   >
                   <input
                     type="text"
@@ -559,7 +571,7 @@
                     name="objet-plainte"
                     class="form-control"
                     readonly
-                    value="plainte.objet"
+                    value="{{plainte.objet}}"
                   />
                 </div>
               </div>
@@ -572,7 +584,7 @@
                     class="form-control"
                     name="publie"
                     readonly
-                    value="plainte.publie"
+                    value="{{plainte.publie}}"
                   />
                 </div>
                 <div class="col-md-4">
@@ -583,7 +595,7 @@
                     class="form-control"
                     id="dividion"
                     readonly
-                    value="plainte.division.ref"
+                    value="{{plainte.division.ref}}"
                   />
                 </div>
                 <div class="col-md-4">
@@ -594,7 +606,7 @@
                     name="dateEnvoi"
                     class="form-control"
                     readonly
-                    value="plainte.dateEnvoi"
+                    value="{{plainte.dateEnvoi}}"
                   />
                 </div>
               </div>
@@ -607,12 +619,12 @@
                     name="expediteur"
                     class="form-control"
                     readonly
-                    value="plainte.expediteur"
+                    value="{{plainte.expediteur}}"
                   />
                 </div>
                 <div class="col-md-4">
                   <label for="numeroEnvoi" class="form-label"
-                    >Numero d'envoi</label
+                  >Numero d'envoi</label
                   >
                   <input
                     type="text"
@@ -620,12 +632,12 @@
                     name="numeroEnvoi"
                     class="form-control"
                     readonly
-                    value="plainte.numeroEnvoi"
+                    value="{{plainte.numeroEnvoi}}"
                   />
                 </div>
                 <div class="col-md-4">
                   <label for="observation" class="form-label"
-                    >Observation</label
+                  >Observation</label
                   >
                   <input
                     type="text"
@@ -633,7 +645,7 @@
                     name="observation"
                     class="form-control"
                     readonly
-                    value="plainte.observation"
+                    value="{{plainte.observation}}"
                   />
                 </div>
               </div>
@@ -646,7 +658,7 @@
                     class="form-control"
                     id="status"
                     readonly
-                    value="plainte.status.statusName"
+                    value="{{plainte.status.statusName}}"
                   />
                 </div>
                 <div class="col-md-4">
@@ -657,12 +669,12 @@
                     class="form-control"
                     id="classe"
                     readonly
-                    value="plainte.pClasse.ref"
+                    value="{{plainte.pClasse.ref}}"
                   />
                 </div>
                 <div class="col-md-4">
                   <label for="tPlainte" class="form-label"
-                    >Plainte Depart</label
+                  >Plainte Depart</label
                   >
                   <input
                     type="text"
@@ -670,7 +682,7 @@
                     class="form-control"
                     id="tPlainte"
                     readonly
-                    value="plainte.plainteDepart.ref"
+                    value="{{plainte.plainteDepart.ref}}"
                   />
                 </div>
               </div>
@@ -683,7 +695,7 @@
                     name="source"
                     class="form-control"
                     readonly
-                    value="plainte.source"
+                    value="{{plainte.source}}"
                   />
                 </div>
                 <div class="col-md-4">
@@ -694,16 +706,11 @@
                     class="form-control"
                     id="type"
                     readonly
-                    value="plainte.theme.ref"
+                    value="{{plainte.theme.ref}}"
                   />
                 </div>
                 <div class="col-md-4">
-                  <textarea
-                    class="form-control"
-                    name="reponse"
-                    placeholder="ajouter la reponse ici"
-                    [(ngModel)]="plainte.reponse"
-                  ></textarea>
+
                 </div>
               </div>
               <div class="row">
@@ -715,12 +722,12 @@
                     class="form-control"
                     id="visa"
                     readonly
-                    value="plainte.visa"
+                    value="{{plainte.visa}}"
                   />
                 </div>
                 <div class="col-md-4">
                   <label for="instruction" class="form-label"
-                    >Instruction</label
+                  >Instruction</label
                   >
                   <input
                     type="text"
@@ -728,7 +735,7 @@
                     class="form-control"
                     id="instruction"
                     readonly
-                    value="plainte.instruction.ref"
+                    value="{{plainte.instruction.ref}}"
                   />
                 </div>
                 <div class="col-md-4">
@@ -741,7 +748,7 @@
                     name="autreIntruction"
                     class="form-control"
                     readonly
-                    value="plainte.ref"
+                    value="{{plainte.ref}}"
                   />
                 </div>
               </div>
@@ -754,9 +761,17 @@
                     class="form-control"
                     id="categorie"
                     readonly
-                    value="plainte.type"
+                    value="{{plainte.type}}"
                   />
                 </div>
+                <div class="col-md-4">
+                  <label class="form-label">Réponse:</label>
+                  <textarea
+                    class="form-control"
+                    name="reponse"
+                    placeholder="ajouter la reponse ici"
+                    [(ngModel)]="plainte.reponse"
+                  ></textarea></div>
               </div>
               <button
                 class="btn btn-warning mt-2"

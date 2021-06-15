@@ -29,8 +29,8 @@ export class RecherchePlainteComponent implements OnInit {
   public resultCritere!: Array<Plainte>;
   public findOrNot = true;
   public plainte = new Plainte();
-  modalRef!: any;
-  modalRefRes!: BsModalRef;
+  public modalRef!: any;
+  public modalRefRes!: BsModalRef;
   public title = 'Fiche du Plainte :';
   public plainteToModify!: Plainte;
   public modifyOn = false;
@@ -41,6 +41,7 @@ export class RecherchePlainteComponent implements OnInit {
   public instructions!: Array<Instruction>;
   public themes!: Array<Theme>;
   public clases!: Array<RClass>;
+  public modalRefModify!: BsModalRef;
 
   constructor(
     private plainteservice: PlaintesService,
@@ -128,24 +129,13 @@ export class RecherchePlainteComponent implements OnInit {
     );
   }
 
-  modify(r: Plainte) {
-    this.plainteservice.findBynumeroDordre(r.numeroDOrdre).subscribe(
-      data => {
-        this.modifyOn = true;
-        this.plainteToModify = data;
-        console.log(this.plainteToModify);
-
-      }, error => {
-        alert(error);
-      }
-    )
-  }
 
   modifySave(plainteToModify: Plainte) {
     this.plainteservice.modifyPlainte(plainteToModify).subscribe(
       data => {
         if (data > 0) {
           alert('modification enregistrée avec succées !');
+          this.modalRefRes.hide();
         } else {
           alert(data);
         }
@@ -224,4 +214,13 @@ export class RecherchePlainteComponent implements OnInit {
     )
   }
 
+  openModalWithClassModify(templateModifyPlainte: TemplateRef<any>,index:number) {
+    this.modalRefModify = this.modalService.show(
+      templateModifyPlainte,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+    let i = index;
+    this.findBynumeroDordre(i);
+
+  }
 }
