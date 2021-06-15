@@ -31,7 +31,7 @@ export class RecherchePlainteComponent implements OnInit {
   public plainte = new Plainte();
   public modalRef!: any;
   public modalRefRes!: BsModalRef;
-  public title = 'Fiche du Plainte :';
+  public title = 'Fiche du Plainte :' ;
   public plainteToModify!: Plainte;
   public modifyOn = false;
   public dossiers!: Array<Dossier>;

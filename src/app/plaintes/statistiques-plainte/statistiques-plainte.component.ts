@@ -1,6 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Plainte} from "../../controller/models/plainte.model";
 import {PlaintesService} from "../../services/plaintes.service";
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import {Dossier} from "../../controller/models/dossier.model";
+import {Status} from "../../controller/models/status.model";
+import {PlainteDepart} from "../../controller/models/plainte-depart.model";
+import {Division} from "../../controller/models/division.model";
+import {Instruction} from "../../controller/models/instruction.model";
+import {Theme} from "../../controller/models/theme.model";
+import {RClass} from "../../controller/models/rclass.model";
+import {StatusService} from "../../services/status.service";
+import {PlainteDepartService} from "../../services/plainte-depart.service";
+import {DivisionService} from "../../services/division.service";
+import {InstructionService} from "../../services/instruction.service";
+import {ThemeService} from "../../services/theme.service";
+import {RclassService} from "../../services/rclass.service";
 
 @Component({
   selector: 'app-statistiques-plainte',
@@ -10,6 +24,7 @@ import {PlaintesService} from "../../services/plaintes.service";
 export class StatistiquesPlainteComponent implements OnInit {
 
   data: any;
+  public title = 'Fiche du Plainte :';
   public nbrTraitee!: number;
   public nbrEnCours!: number;
   public nbrPasEncore!: number;
@@ -22,8 +37,28 @@ export class StatistiquesPlainteComponent implements OnInit {
   private nbrDivAffInterieur!: number;
   public plaintes!: Array<Plainte>;
   public searchBy!: string;
+  public modalRef!: any;
+  public modalRefRes!: BsModalRef;
+  public modalRefModify!: BsModalRef;
+  plainte!: Plainte;
+  public dossiers!: Array<Dossier>;
+  public statusT!: Array<Status>;
+  public plaintesDepart!: Array<PlainteDepart>;
+  public instructions!: Array<Instruction>;
+  public divisions!: Array<Division>;
+  public clases!: Array<RClass>;
+  public themes!: Array<Theme>;
 
-  constructor(private statistiquesService: PlaintesService) {
+  constructor(
+    private statistiquesService: PlaintesService,
+    private modalService:BsModalService,
+    private statusService: StatusService,
+    private plainteDepartService: PlainteDepartService,
+    private divisionService: DivisionService,
+    private instructionService: InstructionService,
+    private themeService: ThemeService,
+    private rclassService: RclassService
+  ) {
   }
 
 
@@ -38,6 +73,13 @@ export class StatistiquesPlainteComponent implements OnInit {
     this.nombreDivCabinet();
     this.nombreDivAffInterieur();
     this.nombreDivSecGeneral();
+    this.findAllDossiers();
+    this.findAllStatus();
+    this.findAllPlainteDepart();
+    this.findAllDivisions();
+    this.findAllInstructions();
+    this.findAllThemes();
+    this.findAllRClass();
     setTimeout(() => {
       this.chartFunction()
     }, 500);
@@ -227,4 +269,142 @@ export class StatistiquesPlainteComponent implements OnInit {
       }
     )
   }
+  openModalWithClassModify(templateModifyPlainte: TemplateRef<any>,index:number) {
+    this.modalRefModify = this.modalService.show(
+      templateModifyPlainte,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+    let i = index;
+    this.findBynumeroDordre(i);
+
+  }
+  findBynumeroDordre(index: number){
+    let numeroDOrdre = this.plaintes[index].numeroDOrdre;
+    this.statistiquesService.findBynumeroDordre(numeroDOrdre).subscribe(
+      data => {
+        console.log(data);
+        this.plainte = data;
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+  openModalWithClass(template: TemplateRef<any>, index: number) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, {class: 'gray modal-lg'})
+    );
+    let i = index;
+    this.findBynumeroDordre(i);
+  }
+
+  /*******/
+  openModalResponse(template: TemplateRef<any>, index: number) {
+    this.modalRefRes = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+    let i = index;
+    this.findBynumeroDordre(i);
+  }
+
+  delete(r: Plainte, i: number) {
+    this.statistiquesService.delete(r.numeroDOrdre).subscribe(
+      data => {
+        if (data) {
+          alert('element deleted successfully !');
+          this.plaintes.splice(i, 1);
+        }
+      }, error => {
+        alert(error);
+      }
+    );
+  }
+
+
+  modifySave(plainteToModify: Plainte) {
+    this.statistiquesService.modifyPlainte(plainteToModify).subscribe(
+      data => {
+        if (data > 0) {
+          alert('modification enregistrée avec succées !');
+          this.modalRefRes.hide();
+        } else {
+          alert(data);
+        }
+      }, error => {
+        alert(error);
+      }
+    );
+  }
+
+  findAllDossiers() {
+    this.statistiquesService.nbrPlainteDossier().subscribe(
+      data => {
+        this.dossiers = data as Dossier[];
+      }
+    )
+  }
+
+  findAllStatus() {
+    this.statusService.findAll().subscribe(
+      data => {
+        this.statusT = data as Status[];
+
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllPlainteDepart() {
+    this.plainteDepartService.findAll().subscribe(
+      data => {
+        this.plaintesDepart = data as PlainteDepart[];
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllDivisions() {
+    this.divisionService.findAll().subscribe(
+      data => {
+        this.divisions = data as Division[];
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllInstructions() {
+    this.instructionService.findAll().subscribe(
+      data => {
+        this.instructions = data as Instruction[];
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllThemes() {
+    this.themeService.findAll().subscribe(
+      data => {
+        this.themes = data as Theme[]
+      }, error => {
+        alert(error);
+      }
+    )
+  }
+
+  findAllRClass() {
+    this.rclassService.findAll().subscribe(
+      data => {
+        this.clases = data as RClass[];
+      }, error => {
+        alert(error)
+      }
+    )
+  }
+
+
 }
