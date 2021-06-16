@@ -243,7 +243,9 @@
               <div *ngIf="theme.errors?.required">**veuillez saisir Theme</div>
             </div>
           </div>
-          <div class="col-md-4"></div>
+          <div class="col-md-4">
+
+          </div>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -307,6 +309,14 @@
               <option value="proposition">Proposition</option>
               <option value="remarque">Remarque</option>
             </select>
+          </div>
+          <div class="col-md-4">
+            <label for="type" class="form-label">Réponse</label>
+            <textarea
+              name="reponse"
+              class="form-control"
+              id="reponse"
+              [(ngModel)]="plainte.reponse"></textarea>
           </div>
         </div>
         <div class="row">

@@ -72,7 +72,7 @@
             <i class="material-icons">replay</i>
           </div>
           <p class="card-category">Total des Plaintes Répondue</p>
-          <h3 class="card-title">245</h3>
+          <h3 class="card-title">6</h3>
         </div>
         <div class="card-footer">
           <div class="stats">
@@ -88,7 +88,7 @@
             <i class="material-icons">bookmark</i>
           </div>
           <p class="card-category">Plaintes Enregistrée</p>
-          <h3 class="card-title">245</h3>
+          <h3 class="card-title">4</h3>
         </div>
         <div class="card-footer">
           <div class="stats">
@@ -115,7 +115,7 @@
             <tbody>
               <tr *ngFor="let p of plaintes">
                 <td>{{ p.numeroDOrdre }}</td>
-                <td>{{ p.createdAt }}</td>
+                <td>{{ p.datePlainte }}</td>
                 <td>{{ p.dossier.nom }}</td>
                 <td>{{ p.status.statusName }}</td>
               </tr>

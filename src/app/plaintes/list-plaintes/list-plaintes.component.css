@@ -7,4 +7,26 @@
   width: 200px;
   margin-bottom: 5px;
 }
+#logo{
+  width: 120px;
+  height: 120px;
 
+}
+.login-pic {
+  width: 120px;
+  margin-bottom: 50px;
+  padding: 0px 0px 0px 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.login-pic img{
+  width: 100%;
+
+}
+h2{
+  align-content: center;
+}
+.colorChange{
+  background-color: #d7e1ec;
+
+}

@@ -1,10 +1,9 @@
 <div class="row my-2">
   <div class="col-md-9 mx-2">
-    <h1>Liste des Plaintes:</h1>
   </div>
   <div class="col-md-2 text-right">
     <a routerLink="../ajouter-plainte">
-      <button class="btn  btn-info">
+      <button class="btn   colorChange">
         <i class="fa fa-plus"></i> Nouveau Plainte
       </button>
     </a>
@@ -14,7 +13,7 @@
   <div class="row my-2">
     <div class="row ">
       <div class="col-md-11"></div>
-      <div class="col-md-1"><button class="btn btn-sm  my-2 text-right btn-info"  (click)="toggleFilter()">
+      <div class="col-md-1"><button class="btn btn-sm  my-2 text-right  colorChange"  (click)="toggleFilter()">
         <span><i class="fa fa-filter"></i></span>
         Filter
       </button></div>
@@ -24,7 +23,7 @@
   <div class="row my-2" *ngIf="this.filter">
     <div class="col-md-3">
       <div>
-        <button class="btn btn-sm btn-primary my-2" (click)="plainteRepondu()">
+        <button class="btn btn-sm  my-2 colorChange" (click)="plainteRepondu()">
           <span><i class="fa fa-check" ></i></span>
           Plaintes Répondu
         </button>
@@ -32,7 +31,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <button class="btn btn-sm btn-primary my-2" (click)="plainteNonRepondu()">
+        <button class="btn btn-sm  my-2 colorChange" (click)="plainteNonRepondu()">
           <span><i class="fa fa-ban"></i></span>
           Plaintes Non Répondu
         </button>
@@ -40,7 +39,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <button class="btn btn-sm btn-primary my-2" (click)="findAll()">
+        <button class="btn btn-sm  my-2 colorChange" (click)="findAll()">
           <span><i class="fa fa-globe"></i></span>
           Tous les Plaintes
         </button>
@@ -62,7 +61,6 @@
               <th scope="col">Type Plainte</th>
               <th scope="col">Status</th>
               <th scope="col">Dossier</th>
-              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -93,7 +91,7 @@
               <td >
                 <span *ngIf="!plaintes[i].reponse">
                   <i
-                    class="btn btn-success mr-2 btn-sm"
+                    class="btn btn-dark mr-2 btn-sm"
                     (click)="openModalResponse(templateReponse, i)"
                   >
                     Ajouter Réponse
@@ -114,7 +112,6 @@
               <td>{{ r.type }}</td>
               <td>{{ r.status.statusName }}</td>
               <td>{{ r.dossier.nom }}</td>
-              <td>{{ r.createdAt }}</td>
             </tr>
           </tbody>
         </table>
@@ -137,9 +134,16 @@
     </div>
     <div class="modal-body" id="pdfDiv">
       <div class="modal-body">
+        <div class="login-pic">
+          <img src="../../assets/images/logoNacer.png" alt="IMG" />
+        </div>
+        <div class="text-center"><h2 >Province Chichaoua</h2></div>
         <div class="countainer">
+
           <div class="card">
+
             <div class="card-body">
+
               <form>
                 <div class="row">
                   <div class="col-md-4">

@@ -39,7 +39,7 @@
             class="form-control select form-select"
             [(ngModel)]="vo.type"
           >
-              <option value="palinte">Plainte</option>
+              <option value="plainte">Plainte</option>
               <option value="proposition">Proposition</option>
               <option value="remarque">Remarque</option>
             </select></span
@@ -99,7 +99,6 @@
             <th scope="col">Type Plainte</th>
             <th scope="col">Status</th>
             <th scope="col">Dossier</th>
-            <th scope="col">Date</th>
           </tr>
           </thead>
           <tbody>
@@ -128,7 +127,7 @@
             <td>
                 <span>
                   <i
-                    class="btn btn-success mr-2 btn-sm"
+                    class="btn btn-danger mr-2 btn-sm"
                     (click)="openModalResponse(templateReponse, i)"
                   >
                     Ajouter Réponse
@@ -142,7 +141,6 @@
             <td>{{ r.type }}</td>
             <td>{{ r.status.statusName }}</td>
             <td>{{ r.dossier.nom }}</td>
-            <td>{{ r.createdAt }}</td>
           </tr>
           </tbody>
         </table>
@@ -487,8 +485,7 @@
             </datalist>
             <div class="text-danger" *ngIf="dossier.touched && !dossier.valid">
               <div *ngIf="dossier.errors?.required">**choisir une dossier</div>
-            </div></span
-          >
+            </div></span>
             </div>
             <div class="col-md-4">
           <span
